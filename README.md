@@ -1,4 +1,4 @@
-#My Notes Repository
+# My Notes Repository
 
 Welcome to my notes repository! Here, you'll find my class notes and notes from various online courses. This collection is a reflection of my learning journey and a resource for anyone interested in the topics covered.
 
