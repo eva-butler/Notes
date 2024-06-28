@@ -15,7 +15,8 @@ Interpreting the data description using the .describe() method
 
 Selecting Data For Modeling:
 - features: variables that are inputted into the model that are later used to make predictions
-
-    melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
-    X = melbourne_data[melbourne_features]
-  
+'''
+melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
+X = melbourne_data[melbourne_features]
+'''
+ 
