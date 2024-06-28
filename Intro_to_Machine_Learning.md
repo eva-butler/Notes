@@ -17,9 +17,9 @@ Selecting Data For Modeling:
 - features: variables that are inputted into the model that are later used to make predictions
 
 
-melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
-X = melbourne_data[melbourne_features]
-y = melbourne_data.Price
+            melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
+            X = melbourne_data[melbourne_features]
+            y = melbourne_data.Price
 
 y-> is the target. what you are trying to predict
 
@@ -32,17 +32,17 @@ Fit: Capture patterns from provided data. This is the heart of modeling.
 Predict: Just what it sounds like
 Evaluate: Determine how accurate the model's predictions are."
 
-from sklearn.tree import DecisionTreeRegressor
-melbourne_model = DecisionTreeRegressor(random_state=1)
-melbourne_model.fit(X, y)
+            from sklearn.tree import DecisionTreeRegressor
+            melbourne_model = DecisionTreeRegressor(random_state=1)
+            melbourne_model.fit(X, y)
 
 
 How you use the model:
-
-print("Making predictions for the following 5 houses:")
-print(X.head())
-print("The predictions are")
-print(melbourne_model.predict(X.head()))
+                  
+                  print("Making predictions for the following 5 houses:")
+                  print(X.head())
+                  print("The predictions are")
+                  print(melbourne_model.predict(X.head()))
 
 
 Model Validation:
@@ -52,10 +52,11 @@ Model Validation:
 
 
 how to calculate MAE: 
-from sklearn.metrics import mean_absolute_error
 
-predicted_home_prices = melbourne_model.predict(X)
-mean_absolute_error(y, predicted_home_prices)
+                        from sklearn.metrics import mean_absolute_error
+                        
+                        predicted_home_prices = melbourne_model.predict(X)
+                        mean_absolute_error(y, predicted_home_prices)
 
 - an alternative to in sample validation, you can use validation data, which is basically reserved in the beginning and not used to train the model.
 
@@ -68,8 +69,9 @@ melbourne_model = DecisionTreeRegressor()
 melbourne_model.fit(train_X, train_y)
 
 #get predicted prices on validation data
-val_predictions = melbourne_model.predict(val_X)
-print(mean_absolute_error(val_y, val_predictions))
+
+      val_predictions = melbourne_model.predict(val_X)
+      print(mean_absolute_error(val_y, val_predictions))
 
 
 Underfitting and Overfitting:
@@ -79,9 +81,9 @@ Underfitting and Overfitting:
 - controlling tree depth: uses max_leaf_nodes as an argument
 
 to determine optimal number of leaves for a tree:
+                              
       from sklearn.metrics import mean_absolute_error
       from sklearn.tree import DecisionTreeRegressor
-      
       def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
           model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
           model.fit(train_X, train_y)
