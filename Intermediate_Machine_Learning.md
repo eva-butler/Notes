@@ -56,3 +56,7 @@ from sklearn.metrics import mean_absolute_error
 
 
 ## Missing Values
+Three Approaches to Dealing with Missing Values:
+1. Drop Columns
+2. Imputation:fills in the missing values with some number. For instance, we can fill in the mean value along each column.
+3. An Extension to Imputation: In this approach, we impute the missing values, as before. And, additionally, for each column with missing entries in the original dataset, we add a new column that shows the location of the imputed entries.
