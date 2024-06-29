@@ -93,3 +93,17 @@ to determine optimal number of leaves for a tree:
       for max_leaf_nodes in [5, 50, 500, 5000]:
           my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
           print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+
+### Random Forests
+
+- Random Forest: uses many trees, and it makes a prediction by averaging the predictions of each individual tree. Usually performs better than an individual tree alone. Use RandomForestRegressor
+
+              from sklearn.ensemble import RandomForestRegressor
+              from sklearn.metrics import mean_absolute_error
+            
+              forest_model = RandomForestRegressor(random_state=1)
+              forest_model.fit(train_X, train_y)
+              melb_preds = forest_model.predict(val_X)
+              print(mean_absolute_error(val_y, melb_preds))
+
+  
