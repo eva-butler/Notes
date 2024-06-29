@@ -60,18 +60,19 @@ how to calculate MAE:
 
 - an alternative to in sample validation, you can use validation data, which is basically reserved in the beginning and not used to train the model.
 
-- train_test_split: is used to break up the data into two pieces. 
-from sklearn.model_selection import train_test_split
-train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = 0)
-#Define model
-melbourne_model = DecisionTreeRegressor()
-#Fit model
-melbourne_model.fit(train_X, train_y)
+- train_test_split: is used to break up the data into two pieces.
 
-#get predicted prices on validation data
-
-      val_predictions = melbourne_model.predict(val_X)
-      print(mean_absolute_error(val_y, val_predictions))
+  
+            from sklearn.model_selection import train_test_split
+            train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = 0)
+            #Define model
+            melbourne_model = DecisionTreeRegressor()
+            #Fit model
+            melbourne_model.fit(train_X, train_y)
+            
+            #get predicted prices on validation data
+            val_predictions = melbourne_model.predict(val_X)
+              print(mean_absolute_error(val_y, val_predictions))
 
 
 Underfitting and Overfitting:
