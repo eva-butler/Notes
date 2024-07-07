@@ -56,6 +56,17 @@ from sklearn.metrics import mean_absolute_error
 
 
 ## Missing Values
+To test the different approaches for dealing with missing values, we will use this method to determine the quality of the approach:
+
+        from sklearn.ensemble import RandomForestRegressor
+        from sklearn.metrics import mean_absolute_error
+        
+        # Function for comparing different approaches
+        def score_dataset(X_train, X_valid, y_train, y_valid):
+            model = RandomForestRegressor(n_estimators=100, random_state=0)
+            model.fit(X_train, y_train)
+            preds = model.predict(X_valid)
+            return mean_absolute_error(y_valid, preds)
 Three Approaches to Dealing with Missing Values:
 1. Drop Columns
 
@@ -98,3 +109,52 @@ from sklearn.impute import SimpleImputer
         # Imputation removed column names; put them back
         imputed_X_train_plus.columns = X_train_plus.columns
         imputed_X_valid_plus.columns = X_valid_plus.columns
+
+
+# Categorical Variables
+
+Its just a limited number of values. There are three approaches to dealing with categorical variables
+To get a list of the categorical variables:
+
+        s = (X_train.dtypes == 'object')
+        object_cols = list(s[s].index)
+        
+        print("Categorical variables:")
+        print(object_cols)
+
+ Define a function score_dataset():
+
+     from sklearn.ensemble import RandomForestRegressor
+     from sklearn.metrics import mean_absolute_error
+    
+    # Function for comparing different approaches
+    def score_dataset(X_train, X_valid, y_train, y_valid):
+        model = RandomForestRegressor(n_estimators=100, random_state=0)
+        model.fit(X_train, y_train)
+        preds = model.predict(X_valid)
+        return mean_absolute_error(y_valid, preds)
+
+
+
+
+    
+1. Drop Categorical Variables
+
+        drop_X_train = X_train.select_dtypes(exclude=['object'])
+        drop_X_valid = X_valid.select_dtypes(exclude=['object'])
+2. Ordinal Encoding: assigns each unique value to a different integer. Oridnal Variables sort of need to have a natural ordering to them that can be something like "Never" (0) < "Rarely" (1) < "Most days" (2) < "Every day" (3).
+
+        from sklearn.preprocessing import OrdinalEncoder
+        
+        # Make copy to avoid changing original data 
+        label_X_train = X_train.copy()
+        label_X_valid = X_valid.copy()
+        
+        # Apply ordinal encoder to each column with categorical data
+        ordinal_encoder = OrdinalEncoder()
+        label_X_train[object_cols] = ordinal_encoder.fit_transform(X_train[object_cols])
+        label_X_valid[object_cols] = ordinal_encoder.transform(X_valid[object_cols])
+
+3. One Hot Encoding: creates a new column indicating the presence or absense of a vairable. Variables that do not have a intrinsic ranking are considered nominal variables.
+
+
