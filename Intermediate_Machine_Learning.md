@@ -1,5 +1,5 @@
 # Intermediate Machine Learning
-
+[course here](https://www.kaggle.com/learn/intermediate-machine-learning)
 ## Introduction
 - tackle data types often found in real-world datasets (missing values, categorical variables),
 - design pipelines to improve the quality of your machine learning code,
