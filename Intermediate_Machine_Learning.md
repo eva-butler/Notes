@@ -90,7 +90,7 @@ from sklearn.impute import SimpleImputer
         #Imputation removed column names; put them back
         imputed_X_train.columns = X_train.columns
         imputed_X_valid.columns = X_valid.columns
-3. An Extension to Imputation: In this approach, we impute the missing values, as before. And, additionally, for each column with missing entries in the original dataset, we add a new column that shows the location of the imputed entries.
+3. An Extension to Imputation:" In this approach, we impute the missing values, as before. And, additionally, for each column with missing entries in the original dataset, we add a new column that shows the location of the imputed entries."
 
         # Make copy to avoid changing original data (when imputing)
         X_train_plus = X_train.copy()
@@ -183,7 +183,7 @@ To get a list of the categorical variables:
 
 ## Pipelines
 
-Pipelines are a simple way to keep your data preprocessing and modeling code organized. Specifically, a pipeline bundles preprocessing and modeling steps so you can use the whole bundle as if it were a single step.
+"Pipelines are a simple way to keep your data preprocessing and modeling code organized. Specifically, a pipeline bundles preprocessing and modeling steps so you can use the whole bundle as if it were a single step."
 
 Step 1: Use ColumnTransformer class to bundle together different preprocessing steps. 
     
@@ -215,8 +215,8 @@ Step 2: define model
 
 Step 3: definre a pipeline that bundles the preprocessing and modeling steps
 
-With the pipeline, we preprocess the training data and fit the model in a single line of code. (In contrast, without a pipeline, we have to do imputation, one-hot encoding, and model training in separate steps. This becomes especially messy if we have to deal with both numerical and categorical variables!)
-With the pipeline, we supply the unprocessed features in X_valid to the predict() command, and the pipeline automatically preprocesses the features before generating predictions. (However, without a pipeline, we have to remember to preprocess the validation data before making predictions.)
+"With the pipeline, we preprocess the training data and fit the model in a single line of code. (In contrast, without a pipeline, we have to do imputation, one-hot encoding, and model training in separate steps. This becomes especially messy if we have to deal with both numerical and categorical variables!)
+With the pipeline, we supply the unprocessed features in X_valid to the predict() command, and the pipeline automatically preprocesses the features before generating predictions. (However, without a pipeline, we have to remember to preprocess the validation data before making predictions.)"
     
     from sklearn.metrics import mean_absolute_error
     
