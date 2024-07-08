@@ -111,9 +111,9 @@ from sklearn.impute import SimpleImputer
         imputed_X_valid_plus.columns = X_valid_plus.columns
 
 
-# Categorical Variables
+## Categorical Variables
 
-Its just a limited number of values. There are three approaches to dealing with categorical variables
+Its just a limited number of values. The number of values associated with that variable is considered its cardinality. There are three approaches to dealing with categorical variables
 To get a list of the categorical variables:
 
         s = (X_train.dtypes == 'object')
@@ -180,6 +180,60 @@ To get a list of the categorical variables:
         OH_X_train.columns = OH_X_train.columns.astype(str)
         OH_X_valid.columns = OH_X_valid.columns.astype(str)
 
+
+## Pipelines
+
+Pipelines are a simple way to keep your data preprocessing and modeling code organized. Specifically, a pipeline bundles preprocessing and modeling steps so you can use the whole bundle as if it were a single step.
+
+Step 1: Use ColumnTransformer class to bundle together different preprocessing steps. 
+    
+    from sklearn.compose import ColumnTransformer
+    from sklearn.pipeline import Pipeline
+    from sklearn.impute import SimpleImputer
+    from sklearn.preprocessing import OneHotEncoder
+    
+    # Preprocessing for numerical data
+    numerical_transformer = SimpleImputer(strategy='constant')
+    
+    # Preprocessing for categorical data
+    categorical_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ])
+    
+    # Bundle preprocessing for numerical and categorical data
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ('num', numerical_transformer, numerical_cols),
+            ('cat', categorical_transformer, categorical_cols)
+        ])
+Step 2: define model
+
+    from sklearn.ensemble import RandomForestRegressor
+    
+    model = RandomForestRegressor(n_estimators=100, random_state=0)
+
+Step 3: definre a pipeline that bundles the preprocessing and modeling steps
+
+With the pipeline, we preprocess the training data and fit the model in a single line of code. (In contrast, without a pipeline, we have to do imputation, one-hot encoding, and model training in separate steps. This becomes especially messy if we have to deal with both numerical and categorical variables!)
+With the pipeline, we supply the unprocessed features in X_valid to the predict() command, and the pipeline automatically preprocesses the features before generating predictions. (However, without a pipeline, we have to remember to preprocess the validation data before making predictions.)
+    
+    from sklearn.metrics import mean_absolute_error
+    
+    # Bundle preprocessing and modeling code in a pipeline
+    my_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
+                                  ('model', model)
+                                 ])
+    
+    # Preprocessing of training data, fit model 
+    my_pipeline.fit(X_train, y_train)
+    
+    # Preprocessing of validation data, get predictions
+    preds = my_pipeline.predict(X_valid)
+    
+    # Evaluate the model
+    score = mean_absolute_error(y_valid, preds)
+    print('MAE:', score)
 
 
 
