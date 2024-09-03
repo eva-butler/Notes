@@ -12,8 +12,24 @@
   - THe Experience (E): experience a dataset or examples divides into supervised and unsupervised learning, also reinforcement learning (supervised-> label {this is an apple}, unsupervised -> this looks like this other thing, reinforcement -> eat this and it keeps you from getting sick)
 
 ### Readings: Chapter 1
+- Machine learning is the science (and art) of programming computers so they can learn from data.
+- The examples that the system uses to learn are called the training set. Each training example is called a training instance (or sample). The part of a machine learning system that learns and makes predictions is called a model. 
+- A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E. ****
+- To summarize, machine learning is great for:
+    - Problems for which existing solutions require a lot of fine-tuning or long lists of rules (a machine learning model can often simplify code and perform better than the traditional approach)
+    - Complex problems for which using a traditional approach yields no good solution (the best machine learning techniques can perhaps find a solution)
+    - Fluctuating environments (a machine learning system can easily be retrained on new data, always keeping it up to date)
+    - Getting insights about complex problems and large amounts of data
 
+- Supervised Learning: the training set you feed to the algorithm includes the desired solutions, called labels. A typical supervised learning task is classification. Another typical task is to predict a target numeric value, such as the price of a car, given a set of features
+- Unsupervised Learning: In unsupervised learning, as you might guess, the training data is unlabeled The system tries to learn without a teacher. You may want to run a clustering algorithm to try to detect groups of similar visitors. If you use a hierarchical clustering algorithm, it may also subdivide each group into smaller groups. Visualization algorithms are also good examples of unsupervised learning: you feed them a lot of complex and unlabeled data, and they output a 2D or 3D representation of your data that can easily be plotted. A related task is dimensionality reduction, in which the goal is to simplify the data without losing too much information. For example, a car’s mileage may be strongly correlated with its age, so the dimensionality reduction algorithm will merge them into one feature that represents the car’s wear and tear. This is called *feature extraction*.  another important unsupervised task is anomaly detection—for example, detecting unusual credit card transactions to prevent fraud, catching manufacturing defects, or automatically removing outliers from a dataset before feeding it to another learning algorithm. A very similar task is novelty detection: it aims to detect new instances that look different from all instances in the training set. association rule learning, in which the goal is to dig into large amounts of data and discover interesting relations between attributes.
+- Semi-supervised Learning: Since labeling data is usually time-consuming and costly, you will often have plenty of unlabeled instances, and few labeled instances. Some algorithms can deal with data that’s partially labeled. This is called semi-supervised learning.
+- Self-supervised Learning: Another approach to machine learning involves actually generating a fully labeled dataset from a fully unlabeled one. Again, once the whole dataset is labeled, any supervised learning algorithm can be used. This approach is called self-supervised learning.
+- Reinforcement Learning: Reinforcement learning is a very different beast. The learning system, called an agent in this context, can observe the environment, select and perform actions, and get rewards in return. It must then learn by itself what is the best strategy, called a policy, to get the most reward over time. A policy defines what action the agent should choose when it is in a given situation.
 
+Batch Versus Online Learning:
+- Batch Learning: In batch learning, the system is incapable of learning incrementally: it must be trained using all the available data. Normally done offline. first trained and then launched. performance decay over time.
+- Online Learning: In online learning, you train the system incrementally by feeding it data instances sequentially, either individually or in small groups called mini-batches. Each learning step is fast and cheap, so the system can learn about new data on the fly, as it arrives. 
 # Module 2: Fundamentals of ML 
 
 ## Class 2 (in person):
