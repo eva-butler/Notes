@@ -136,7 +136,7 @@ This chapter is an example project end to end
 
 [7]()) Present your solution.
 
-[8]()) Launch, monitor, and maintain your system.
+[8](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#8-present-launch-monitor-and-maintain-your-system)) Launch, monitor, and maintain your system.
 
  ####  (1) Looking at the Big Picture
 Your first task is to use California census data to build a model of housing prices in the state.
