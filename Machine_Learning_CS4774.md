@@ -249,4 +249,72 @@ Experiment with Attribute Combinations
 - you can just mess around wiht combos of attributes to see if you can make higher coorelations
 
 ##### (4) Prepare the Data for Machine Learning Algorithms
+DO NOT DO THIS MANUALLY!! CREATE FUNCTIONS TO DO THIS FOR YOU!!
+- This will allow you to reproduce these transformations easily on any dataset (e.g., the next time you get a fresh dataset).
+- You will gradually build a library of transformation functions that you can reuse in future projects.
+- You can use these functions in your live system to transform the new data before feeding it to your algorithms.
+- This will make it possible for you to easily try various transformations and see which combination of transformations works best.
 
+Clean the Data:
+- Get rid of the corresponding districts.
+- Get rid of the whole attribute.
+- Set the missing values to some value (zero, the mean, the median, etc.). This is called imputation.
+THese can be handled with dropna(), drop(), and fillna()
+        
+        housing.dropna(subset=["total_bedrooms"], inplace=True)  # option 1
+        
+        housing.drop("total_bedrooms", axis=1)  # option 2
+        
+        median = housing["total_bedrooms"].median()  # option 3
+        housing["total_bedrooms"].fillna(median, inplace=True)
+
+Imputation
+- Simple Imputer
+  
+        from sklearn.impute import SimpleImputer
+        
+        imputer = SimpleImputer(strategy="median")
+  - Missing values can also be replaced with the mean value (strategy="mean"), or with the most frequent value (strategy="most_frequent"), or with a constant value (strategy="constant", fill_value=…​). The last two strategies support non-numerical data.
+- KNNImputer: replaces each missing value with the mean of the k-nearest neighbors’ values for that feature. The distance is based on all the available features.
+- IterativeImputer: trains a regression model per feature to predict the missing values based on all the other available features. It then trains the model again on the updated data, and repeats the process several times, improving the models and the replacement values at each iteration.
+
+Handling Text and Categorical Attributes
+- OrdinalEncoder: meant for categorical variables
+
+        from sklearn.preprocessing import OrdinalEncoder
+        
+        ordinal_encoder = OrdinalEncoder()
+        housing_cat_encoded = ordinal_encoder.fit_transform(housing_cat)
+- OneHot Encoding: sort of picks on one variable. To fix this issue, a common solution is to create one binary attribute per category: one attribute equal to 1 when the category is "<1H OCEAN" (and 0 otherwise), another attribute equal to 1 when the category is "INLAND" (and 0 otherwise), and so on. This is called one-hot encoding, because only one attribute will be equal to 1 (hot), while the others will be 0 (cold). OneHotEncoder output one column per learned category, in the right order. 
+        
+        from sklearn.preprocessing import OneHotEncoder
+        
+        cat_encoder = OneHotEncoder()
+        housing_cat_1hot = cat_encoder.fit_transform(housing_cat)
+
+Feature Scaling and Transformation: 
+- min-max scaling:  is the simplest: for each attribute, the values are shifted and rescaled so that they end up ranging from 0 to 1. This is performed by subtracting the min value and dividing by the difference between the min and the max. Scikit-Learn provides a transformer called MinMaxScaler for this. It has a feature_range hyperparameter that lets you change the range if, for some reason, you don’t want 0–1
+
+        from sklearn.preprocessing import MinMaxScaler
+        
+        min_max_scaler = MinMaxScaler(feature_range=(-1, 1))
+        housing_num_min_max_scaled = min_max_scaler.fit_transform(housing_num)
+- Standardization: first it subtracts the mean value (so standardized values have a zero mean), then it divides the result by the standard deviation (so standardized values have a standard deviation equal to 1). Unlike min-max scaling, standardization does not restrict values to a specific range. This is like what we do in stats
+
+        from sklearn.preprocessing import StandardScaler
+        
+        std_scaler = StandardScaler()
+        housing_num_std_scaled = std_scaler.fit_transform(housing_num)
+
+- TIP: When a feature’s distribution has a heavy tail (i.e., when values far from the mean are not exponentially rare), both min-max scaling and standardization will squash most values into a small range. Machine learning models generally don’t like this at all, as you will see in Chapter 4. So before you scale the feature, you should first transform it to shrink the heavy tail, and if possible to make the distribution roughly symmetrical. For example, a common way to do this for positive features with a heavy tail to the right is to replace the feature with its square root (or raise the feature to a power between 0 and 1). If the feature has a really long and heavy tail, such as a power law distribution, then replacing the feature with its logarithm may help.
+
+Custom Transformers !! dont really understand this come back and read more thouroughly
+
+you can create custom transformers like this. this is a log transformer:
+        
+        from sklearn.preprocessing import FunctionTransformer
+        
+        log_transformer = FunctionTransformer(np.log, inverse_func=np.exp)
+        log_pop = log_transformer.transform(housing[["population"]])
+
+Transformation Pipelines:
