@@ -132,7 +132,7 @@ This chapter is an example project end to end
 
 [5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#5-select-and-train-a-model)) Select a model and train it.
 
-[6]()) Fine-tune your model.
+[6](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#6-fine-tune-your-model)) Fine-tune your model.
 
 [7]()) Present your solution.
 
