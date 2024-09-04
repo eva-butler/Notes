@@ -29,7 +29,45 @@
 
 Batch Versus Online Learning:
 - Batch Learning: In batch learning, the system is incapable of learning incrementally: it must be trained using all the available data. Normally done offline. first trained and then launched. performance decay over time.
-- Online Learning: In online learning, you train the system incrementally by feeding it data instances sequentially, either individually or in small groups called mini-batches. Each learning step is fast and cheap, so the system can learn about new data on the fly, as it arrives. 
+- Online Learning: In online learning, you train the system incrementally by feeding it data instances sequentially, either individually or in small groups called mini-batches. Each learning step is fast and cheap, so the system can learn about new data on the fly, as it arrives.
+
+Instance-Based Versus Model-Based Learning
+- based on how a machine generalizes
+- Instance-based learning: This is called instance-based learning: the system learns the examples by heart, then generalizes to new cases by using a similarity measure to compare them to the learned examples (or a subset of them).
+- Model-based learning and a typical machine learning workflow: Another way to generalize from a set of examples is to build a model of these examples and then use that model to make predictions.
+
+In summary:
+- You studied the data.
+- You selected a model.
+- You trained it on the training data (i.e., the learning algorithm searched for the model parameter values that minimize a cost function).
+- Finally, you applied the model to make predictions on new cases (this is called inference), hoping that this model will generalize well.
+
+Main Challenges of Machine Learning:
+- Insufficient Quantity of Training Data
+- Nonrepresentative Training Data
+- Poor-Quality Data
+- Overfitting the Training Data
+- Underfitting the Training data
+
+Testing and Validating:
+- training set and test set
+- generalization error: error rate on new cases
+- training error: errors on training set
+
+Hyperparameter Tuning and Model Selection:
+- train multiple models and compare them
+- holdout validation: you simply hold out part of the training set to evaluate several candidate models and select the best one.
+- validation set: the holdout set of data for determining which model performs the best (also called the dev set)
+
+![mls3_0125](https://github.com/user-attachments/assets/efa05ce2-fab0-40a2-9e27-3a44b22ee572)
+
+Data Mismatch:
+- In this case, the most important rule to remember is that both the validation set and the test set must be as representative as possible of the data you expect to use in production, so they should be composed exclusively of representative pictures: you can shuffle them and put half in the validation set and half in the test set 
+- One solution is to hold out some of the training pictures (from the web) in yet another set that Andrew Ng dubbed the train-dev set
+
+No Free Lunch Theorem: A model is a simplified representation of the data. The simplifications are meant to discard the superfluous details that are unlikely to generalize to new instances. When you select a particular type of model, you are implicitly making assumptions about the data. 
+
+
 # Module 2: Fundamentals of ML 
 
 ## Class 2 (in person):
