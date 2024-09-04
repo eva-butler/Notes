@@ -116,6 +116,5 @@ No Free Lunch Theorem: A model is a simplified representation of the data. The s
                    - have to run different parameters to determine the best number of hyper params
                    - validate dev set
                    - 3 partitions of a set (training, validation, and test)
-               - NO FREE LUNCH THEOREM (NFL) : a model is just a simplifed version of observerations of data. (ASSUMPTIONS) If you make no assumptions about data, then there is no reason to prefer one model over another. 
-          - hypothesis space: the set of functions that the learning data algortihm us allowed to select as being the solution
-             - 
+               - NO FREE LUNCH THEOREM (NFL) : a model is just a simplifed version of observerations of data. (ASSUMPTIONS) If you make no assumptions about data, then there is no reason to prefer one model over another.
+               -  hypothesis space: the set of functions that the learning data algortihm us allowed to select as being the solution
