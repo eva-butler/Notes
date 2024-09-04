@@ -128,7 +128,7 @@ This chapter is an example project end to end
 
 [3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#3-explore-and-visualize-the-data-to-gain-insights)) Explore and visualize the data to gain insights.
 
-[4]()) Prepare the data for machine learning algorithms.
+[4](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#4-prepare-the-data-for-machine-learning-algorithms)) Prepare the data for machine learning algorithms.
 
 [5]()) Select a model and train it.
 
