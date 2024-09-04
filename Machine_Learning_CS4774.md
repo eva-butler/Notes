@@ -1,5 +1,5 @@
 Table of Contents:
-- Module 1: (Introduction to ML)[https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-1-introduction-to-ml]
+- Module 1: [Introduction to ML](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-1-introduction-to-ml)
     - Class 1
     - Readings: Chapter 1
 - Module 2: Fundamentals of ML
