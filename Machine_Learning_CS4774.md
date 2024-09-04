@@ -1,8 +1,10 @@
 Table of Contents:
-1) Module 1: Introduction to ML
-  a) Class 1
-  b) Readings: Chapter 1
-  c) 
+- Module 1: Introduction to ML
+    - Class 1
+    - Readings: Chapter 1
+- Module 2: Fundamentals of ML
+    - Class 2
+    - Readings: Chapter 2
 
 
 # Module 1: Introduction to ML
