@@ -1,3 +1,10 @@
+Table of Contents:
+1) Module 1: Introduction to ML
+  a) Class 1
+  b) Readings: Chapter 1
+  c) 
+
+
 # Module 1: Introduction to ML
 
 ## Class 1 (in person): 
