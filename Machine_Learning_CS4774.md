@@ -131,7 +131,7 @@ This chapter is an example project end to end
 7) Present your solution.
 8) Launch, monitor, and maintain your system.
 
- #####  (1) Looking at the Big Picture
+ ####  (1) Looking at the Big Picture
 Your first task is to use California census data to build a model of housing prices in the state.
 - Frame the Problem:
     - Knowing the objective is important because it will determine how you frame the problem, which algorithms you will select, which performance measure you will use to evaluate your model, and how much effort you will spend tweaking it.
@@ -150,7 +150,7 @@ Your first task is to use California census data to build a model of housing pri
 
 - Check the Assumptions: Lastly, it is good practice to list and verify the assumptions that have been made so far (by you or others); this can help you catch serious issues early on.
 
-##### (2) Get the Data
+#### (2) Get the Data
 
 a function to fetch and load data:
 
@@ -217,7 +217,7 @@ Creating a Test Set:
           strat_train_set, strat_test_set = train_test_split(
           housing, test_size=0.2, stratify=housing["income_cat"], random_state=42)
 
-##### (3) Explore and Visualize the Data to Gain Insights
+#### (3) Explore and Visualize the Data to Gain Insights
 Only do this for the training set. do not touch the test set
 
 Visualizing Geographical Data:
@@ -248,7 +248,7 @@ Looking for Correlations:
 Experiment with Attribute Combinations
 - you can just mess around wiht combos of attributes to see if you can make higher coorelations
 
-##### (4) Prepare the Data for Machine Learning Algorithms
+#### (4) Prepare the Data for Machine Learning Algorithms
 DO NOT DO THIS MANUALLY!! CREATE FUNCTIONS TO DO THIS FOR YOU!!
 - This will allow you to reproduce these transformations easily on any dataset (e.g., the next time you get a fresh dataset).
 - You will gradually build a library of transformation functions that you can reuse in future projects.
@@ -318,3 +318,204 @@ you can create custom transformers like this. this is a log transformer:
         log_pop = log_transformer.transform(housing[["population"]])
 
 Transformation Pipelines:
+- the Pipelines class helps with the sequences of transformations. 
+
+            from sklearn.pipeline import Pipeline
+        
+        num_pipeline = Pipeline([
+            ("impute", SimpleImputer(strategy="median")),
+            ("standardize", StandardScaler()),
+        ])
+- The Pipeline constructor takes a list of name/estimator pairs (2-tuples) defining a sequence of steps. The names can be anything you like, as long as they are unique and don’t contain double underscores (__). They will be useful later, when we discuss hyperparameter tuning.
+- If you don’t want to name the transformers, you can use the make_pipeline() function instead; it takes transformers as positional arguments and creates a Pipeline using the names of the transformers’ classes, in lowercase and without underscores (e.g., "simpleimputer"):
+
+        from sklearn.pipeline import make_pipeline
+        
+        num_pipeline = make_pipeline(SimpleImputer(strategy="median"), StandardScaler())
+
+- It would be more convenient to have a single transformer capable of handling all columns, applying the appropriate transformations to each column. For this, you can use a ColumnTransformer. For example, the following ColumnTransformer will apply num_pipeline (the one we just defined) to the numerical attributes and cat_pipeline to the categorical attribute:
+
+        from sklearn.compose import ColumnTransformer
+        
+        num_attribs = ["longitude", "latitude", "housing_median_age", "total_rooms",
+                       "total_bedrooms", "population", "households", "median_income"]
+        cat_attribs = ["ocean_proximity"]
+        
+        cat_pipeline = make_pipeline(
+            SimpleImputer(strategy="most_frequent"),
+            OneHotEncoder(handle_unknown="ignore"))
+        
+        preprocessing = ColumnTransformer([
+            ("num", num_pipeline, num_attribs),
+            ("cat", cat_pipeline, cat_attribs),
+        ])
+
+  also
+
+          from sklearn.compose import make_column_selector, make_column_transformer
+        
+        preprocessing = make_column_transformer(
+            (num_pipeline, make_column_selector(dtype_include=np.number)),
+            (cat_pipeline, make_column_selector(dtype_include=object)),
+        )
+
+        housing_prepared = preprocessing.fit_transform(housing)
+
+- Now lets see what the full pipeline will look like:
+    - Missing values in numerical features will be imputed by replacing them with the median, as most ML algorithms don’t expect missing values. In categorical features, missing values will be replaced by the most frequent category.
+    - The categorical feature will be one-hot encoded, as most ML algorithms only accept numerical inputs.
+    - A few ratio features will be computed and added: bedrooms_ratio, rooms_per_house, and people_per_house. Hopefully these will better correlate with the median house value, and thereby help the ML models.
+    - A few cluster similarity features will also be added. These will likely be more useful to the model than latitude and longitude.
+    - Features with a long tail will be replaced by their logarithm, as most models prefer features with roughly uniform or Gaussian distributions.
+    - All numerical features will be standardized, as most ML algorithms prefer when all features have roughly the same scale.
+            
+            def column_ratio(X):
+                return X[:, [0]] / X[:, [1]]
+            
+            def ratio_name(function_transformer, feature_names_in):
+                return ["ratio"]  # feature names out
+            
+            def ratio_pipeline():
+                return make_pipeline(
+                    SimpleImputer(strategy="median"),
+                    FunctionTransformer(column_ratio, feature_names_out=ratio_name),
+                    StandardScaler())
+            
+            log_pipeline = make_pipeline(
+                SimpleImputer(strategy="median"),
+                FunctionTransformer(np.log, feature_names_out="one-to-one"),
+                StandardScaler())
+            cluster_simil = ClusterSimilarity(n_clusters=10, gamma=1., random_state=42)
+            default_num_pipeline = make_pipeline(SimpleImputer(strategy="median"),
+                                                 StandardScaler())
+            preprocessing = ColumnTransformer([
+                    ("bedrooms", ratio_pipeline(), ["total_bedrooms", "total_rooms"]),
+                    ("rooms_per_house", ratio_pipeline(), ["total_rooms", "households"]),
+                    ("people_per_house", ratio_pipeline(), ["population", "households"]),
+                    ("log", log_pipeline, ["total_bedrooms", "total_rooms", "population",
+                                           "households", "median_income"]),
+                    ("geo", cluster_simil, ["latitude", "longitude"]),
+                    ("cat", cat_pipeline, make_column_selector(dtype_include=object)),
+                ],
+                remainder=default_num_pipeline)  # one column remaining:
+
+#### (5) Select and Train a Model
+Train and Evaluate on the Training Set:
+- A linear regression model:
+
+        from sklearn.linear_model import LinearRegression
+        
+        lin_reg = make_pipeline(preprocessing, LinearRegression())
+        lin_reg.fit(housing, housing_labels)
+- Decission Tree REgressor:
+
+        from sklearn.tree import DecisionTreeRegressor
+        
+        tree_reg = make_pipeline(preprocessing, DecisionTreeRegressor(random_state=42))
+        tree_reg.fit(housing, housing_labels)
+
+Better Evaluation Using Cross-Validation
+- Scikit-Learn’s k_-fold cross-validation feature: The following code randomly splits the training set into 10 nonoverlapping subsets called folds, then it trains and evaluates the decision tree model 10 times, picking a different fold for evaluation every time and using the other 9 folds for training. The result is an array containing the 10 evaluation scores:
+
+        from sklearn.model_selection import cross_val_score
+        
+        tree_rmses = -cross_val_score(tree_reg, housing, housing_labels,
+                                      scoring="neg_root_mean_squared_error", cv=10)
+
+- Random Forest Regressor:
+
+        from sklearn.ensemble import RandomForestRegressor
+        
+        forest_reg = make_pipeline(preprocessing,
+                                   RandomForestRegressor(random_state=42))
+        forest_rmses = -cross_val_score(forest_reg, housing, housing_labels,
+                                        scoring="neg_root_mean_squared_error", cv=10)
+
+#### (6) Fine Tune Your Model
+Grid Search
+- one option would be to mess with the hyperparams manually, but instead u can use Grid Search to do that for you
+- GridSearchCV: tell it which hyperparameters you want it to experiment with and what values to try out, and it will use cross-validation to evaluate all the possible combinations of hyperparameter values
+
+        from sklearn.model_selection import GridSearchCV
+        
+        full_pipeline = Pipeline([
+            ("preprocessing", preprocessing),
+            ("random_forest", RandomForestRegressor(random_state=42)),
+        ])
+        param_grid = [
+            {'preprocessing__geo__n_clusters': [5, 8, 10],
+             'random_forest__max_features': [4, 6, 8]},
+            {'preprocessing__geo__n_clusters': [10, 15],
+             'random_forest__max_features': [6, 8, 10]},
+        ]
+        grid_search = GridSearchCV(full_pipeline, param_grid, cv=3,
+                                   scoring='neg_root_mean_squared_error')
+        grid_search.fit(housing, housing_labels)
+
+- There are two dictionaries in this param_grid, so GridSearchCV will first evaluate all 3 × 3 = 9 combinations of n_clusters and max_features hyperparameter values specified in the first dict, then it will try all 2 × 3 = 6 combinations of hyperparameter values in the second dict. So in total the grid search will explore 9 + 6 = 15 combinations of hyperparameter values, and it will train the pipeline 3 times per combination, since we are using 3-fold cross validation. This means there will be a grand total of 15 × 3 = 45 rounds of training!
+
+Randomized Search
+- RandomizedSearchCV: often preferable when you have lots of differet possible combos.
+
+        from sklearn.model_selection import RandomizedSearchCV
+        from scipy.stats import randint
+        
+        param_distribs = {'preprocessing__geo__n_clusters': randint(low=3, high=50),
+                          'random_forest__max_features': randint(low=2, high=20)}
+        
+        rnd_search = RandomizedSearchCV(
+            full_pipeline, param_distributions=param_distribs, n_iter=10, cv=3,
+            scoring='neg_root_mean_squared_error', random_state=42)
+        
+        rnd_search.fit(housing, housing_labels)
+
+Ensemble Models
+- you can try to combine models that seem to work the best. The group (or “ensemble”) will often perform better than the best individual model—just like random forests perform better than the individual decision trees they rely on—especially if the individual models make very different types of errors.
+
+Analyzing the Best models and their errors
+- RandomForestRegressor -> good indication of the relative importance of each attribute for making accurate predictions
+- You should also look at the specific errors that your system makes, then try to understand why it makes them and what could fix the problem: adding extra features or getting rid of uninformative ones, cleaning up outliers, etc.
+
+Evalutate Your System on the Test Set
+- run your final_model to transform the data and make predictions, then evaluate these predictions
+        
+        X_test = strat_test_set.drop("median_house_value", axis=1)
+        y_test = strat_test_set["median_house_value"].copy()
+        
+        final_predictions = final_model.predict(X_test)
+        
+        final_rmse = mean_squared_error(y_test, final_predictions, squared=False)
+        print(final_rmse)  # prints 41424.40026462184
+
+- you can compute a 95% confidence interval for the generalization error using scipy.stats.t.interval(). You get a fairly large interval from 39,275 to 43,467, and your previous point estimate of 41,424 is roughly in the middle of it:
+        
+        from scipy import stats
+        >>> confidence = 0.95
+        >>> squared_errors = (final_predictions - y_test) ** 2
+        >>> np.sqrt(stats.t.interval(confidence, len(squared_errors) - 1,
+        ...                          loc=squared_errors.mean(),
+        ...                          scale=stats.sem(squared_errors)))
+        ...
+
+#### (8) Present, Launch, Monitor, and Maintain Your System
+- The most basic way to do this is just to save the best model you trained, transfer the file to your production environment, and load it.
+        
+        import joblib
+        
+        joblib.dump(final_model, "my_california_housing_model.pkl")
+
+- Here is how you would use your model to make predictions:
+        
+        import joblib
+        [...]  # import KMeans, BaseEstimator, TransformerMixin, rbf_kernel, etc.
+        
+        def column_ratio(X): [...]
+        def ratio_name(function_transformer, feature_names_in): [...]
+        class ClusterSimilarity(BaseEstimator, TransformerMixin): [...]
+        
+        final_model_reloaded = joblib.load("my_california_housing_model.pkl")
+        
+        new_data = [...]  # some new districts to make predictions for
+        predictions = final_model_reloaded.predict(new_data)
+
+- You need to put in some kind of monitoring system no mater how you launch the model
