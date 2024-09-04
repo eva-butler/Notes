@@ -130,7 +130,7 @@ This chapter is an example project end to end
 
 [4](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#4-prepare-the-data-for-machine-learning-algorithms)) Prepare the data for machine learning algorithms.
 
-[5]()) Select a model and train it.
+[5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#5-select-and-train-a-model)) Select a model and train it.
 
 [6]()) Fine-tune your model.
 
