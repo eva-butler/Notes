@@ -118,3 +118,135 @@ No Free Lunch Theorem: A model is a simplified representation of the data. The s
                    - 3 partitions of a set (training, validation, and test)
                - NO FREE LUNCH THEOREM (NFL) : a model is just a simplifed version of observerations of data. (ASSUMPTIONS) If you make no assumptions about data, then there is no reason to prefer one model over another.
                -  hypothesis space: the set of functions that the learning data algortihm us allowed to select as being the solution
+
+### Readings: Chapter 2
+This chapter is an example project end to end
+
+1) Look at the big picture.
+2) Get the data.
+3) Explore and visualize the data to gain insights.
+4) Prepare the data for machine learning algorithms.
+5) Select a model and train it.
+6) Fine-tune your model.
+7) Present your solution.
+8) Launch, monitor, and maintain your system.
+
+ #####  (1) Looking at the Big Picture
+Your first task is to use California census data to build a model of housing prices in the state.
+- Frame the Problem:
+    - Knowing the objective is important because it will determine how you frame the problem, which algorithms you will select, which performance measure you will use to evaluate your model, and how much effort you will spend tweaking it.
+    - what the current solution looks like (if any). The current situation will often give you a reference for performance, as well as insights on how to solve the problem.
+    - **pipelines**: A sequence of data processing components. Pipelines are very common in machine learning systems, since there is a lot of data to manipulate and many data transformations to apply.
+ 
+  This is clearly a typical supervised learning task, since the model can be trained with labeled examples (each instance comes with the expected output, i.e., the district’s median housing price). It is a typical regression task, since the model will be asked to predict a value. More specifically, this is a multiple regression problem, since the system will use multiple features to make a prediction (the district’s population, the median income, etc.). It is also a univariate regression problem, since we are only trying to predict a single value for each district. If we were trying to predict multiple values per district, it would be a multivariate regression problem. Finally, there is no continuous flow of data coming into the system, there is no particular need to adjust to changing data rapidly, and the data is small enough to fit in memory, so plain batch learning should do just fine.
+  
+- Select a Performance Measure: A typical performance measure for regression problems is the root mean square error (RMSE). It gives an idea of how much error the system typically makes in its predictions, with a higher weight given to large errors.
+  
+![download](https://github.com/user-attachments/assets/18447aec-a1a7-4f28-8655-a17c0a8b27be)
+
+- Although the RMSE is generally the preferred performance measure for regression tasks, in some contexts you may prefer to use another function. For example, if there are many outlier districts. In that case, you may consider using the mean absolute error (MAE, also called the average absolute deviation)
+
+![images](https://github.com/user-attachments/assets/72162fc6-7fb3-4906-9be9-845a9c2f60b9)
+
+- Check the Assumptions: Lastly, it is good practice to list and verify the assumptions that have been made so far (by you or others); this can help you catch serious issues early on.
+
+##### (2) Get the Data
+
+a function to fetch and load data:
+
+        from pathlib import Path
+        import pandas as pd
+        import tarfile
+        import urllib.request
+        
+        def load_housing_data():
+            tarball_path = Path("datasets/housing.tgz")
+            if not tarball_path.is_file():
+                Path("datasets").mkdir(parents=True, exist_ok=True)
+                url = "https://github.com/ageron/data/raw/main/housing.tgz"
+                urllib.request.urlretrieve(url, tarball_path)
+                with tarfile.open(tarball_path) as housing_tarball:
+                    housing_tarball.extractall(path="datasets")
+            return pd.read_csv(Path("datasets/housing/housing.csv"))
+        
+        housing = load_housing_data()
+
+This give syou a histogram that shows the number of instances getting an idea of the distribution
+
+        import matplotlib.pyplot as plt
+        
+        housing.hist(bins=50, figsize=(12, 8))
+        plt.show()
+
+- Finally, many histograms are skewed right: they extend much farther to the right of the median than to the left. This may make it a bit harder for some machine learning algorithms to detect patterns. Later, you’ll try transforming these attributes to have more symmetrical and bell-shaped distributions. > good to know. you want to try to have a normal distribution. i guess that makes it easier to spot patterns? Well we learned how to do that in Stat
+
+Creating a Test Set:
+- Creating a test set is theoretically simple; pick some instances randomly, typically 20% of the dataset (or less if your dataset is very large), and set them aside:
+
+        import numpy as np
+        
+        def shuffle_and_split_data(data, test_ratio):
+            shuffled_indices = np.random.permutation(len(data))
+            test_set_size = int(len(data) * test_ratio)
+            test_indices = shuffled_indices[:test_set_size]
+            train_indices = shuffled_indices[test_set_size:]
+            return data.iloc[train_indices], data.iloc[test_indices]
+
+- need to ensure that the test set remains consistent over multiple runs. here is a wau to do that:
+
+          from zlib import crc32
+        
+        def is_id_in_test_set(identifier, test_ratio):
+            return crc32(np.int64(identifier)) < test_ratio * 2**32
+        
+        def split_data_with_id_hash(data, test_ratio, id_column):
+            ids = data[id_column]
+            in_test_set = ids.apply(lambda id_: is_id_in_test_set(id_, test_ratio))
+            return data.loc[~in_test_set], data.loc[in_test_set]
+
+          housing_with_id = housing.reset_index()  # adds an `index` column
+            train_set, test_set = split_data_with_id_hash(housing_with_id, 0.2, "index")
+  
+- train_test_split() pretty much does the same thing as these methods above.
+
+      from sklearn.model_selection import train_test_split
+        train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
+
+- want to put some strategy behind it to make sure the basic qualities of the sets are similar:
+
+          strat_train_set, strat_test_set = train_test_split(
+          housing, test_size=0.2, stratify=housing["income_cat"], random_state=42)
+
+##### (3) Explore and Visualize the Data to Gain Insights
+Only do this for the training set. do not touch the test set
+
+Visualizing Geographical Data:
+- good to create a scatter plot
+
+        housing.plot(kind="scatter", x="longitude", y="latitude", grid=True, alpha = 0.2)
+        plt.show()
+- color mapping:
+
+          housing.plot(kind="scatter", x="longitude", y="latitude", grid=True,
+                     s=housing["population"] / 100, label="population",
+                     c="median_house_value", cmap="jet", colorbar=True,
+                     legend=True, sharex=False, figsize=(10, 7))
+            plt.show()
+Looking for Correlations:
+- Since data set is kind of small you can compute the standard correlation coefficient between every pair of attributes using the corr() method. The correlation coefficient ranges from –1 to 1. When it is close to 1, it means that there is a strong positive correlation; for example, the median house value tends to go up when the median income goes up. When the coefficient is close to –1, it means that there is a strong negative correlation; you can see a small negative correlation between the latitude and the median house value (i.e., prices have a slight tendency to go down when you go north). Finally, coefficients close to 0 mean that there is no linear correlation:
+  
+          corr_matrix = housing.corr()
+- Another way is scatter_matrix(). plots every numerical attribute against every other numerical attribute. Since there are now 11 numerical attributes, you would get 112 = 121 plots, which would not fit on a page—so you decide to focus on a few promising attributes that seem most correlated with the median housing value
+
+          from pandas.plotting import scatter_matrix
+        
+        attributes = ["median_house_value", "median_income", "total_rooms",
+                      "housing_median_age"]
+        scatter_matrix(housing[attributes], figsize=(12, 8))
+        plt.show()
+
+Experiment with Attribute Combinations
+- you can just mess around wiht combos of attributes to see if you can make higher coorelations
+
+##### (4) Prepare the Data for Machine Learning Algorithms
+
