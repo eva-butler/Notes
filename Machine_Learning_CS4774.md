@@ -124,7 +124,7 @@ This chapter is an example project end to end
 
 [1](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#1-looking-at-the-big-picture)) Look at the big picture.
 
-[2]()) Get the data.
+[2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#2-get-the-data)) Get the data.
 
 [3]()) Explore and visualize the data to gain insights.
 
