@@ -5,6 +5,8 @@ Table of Contents:
 - Module 2: [Fundamentals of ML](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-2-fundamentals-of-ml)
     - [Class 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-2-in-person)
     - Readings: [Chapter 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-2)
+    - [Class 3]() 
+    - [Class 4]()
 
 
 # Module 1: Introduction to ML
@@ -526,3 +528,27 @@ Evalutate Your System on the Test Set
         predictions = final_model_reloaded.predict(new_data)
 
 - You need to put in some kind of monitoring system no mater how you launch the model
+
+
+## Class 3
+- Looking at the Big Picture (1/8)
+  - frame the problem
+    - task: regression, classification, clustering, visualization?
+    - benefit???
+    - performance? how to measure
+        - Mean Absolute Error (MAE): measures distance between prediction and target values, corresponds to L1 Norm
+               ![Screenshot 2024-09-04 102401](https://github.com/user-attachments/assets/6316e8b9-c995-4583-bc56-01ca188ce8f2)
+              - X -> All the training data
+              - h -> Hypothesis/model
+              - m -> number of instances
+              - x(i) -> feature vector of the ith instance
+              - h(i) -> predicted value of the ith instance
+              - y(i) -> value of the ith instance
+        - Root Mean Squared Error (RMSE): Correspond to L2 norm, more sensitive to outliers than MSE, but generally performs better. -> seen errors appear LARGER than those in the MSE
+
+          <img width="294" alt="image" src="https://github.com/user-attachments/assets/dc99ecad-003c-4848-a74a-69821a36fd34">
+
+    - data: how much is available?
+    - what learning algo should you use?
+    - how mcuh effort should be spent?
+      
