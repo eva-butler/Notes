@@ -531,7 +531,7 @@ Evalutate Your System on the Test Set
 
 
 ## Class 3
-- Looking at the Big Picture (1/8)
+- **Looking at the Big Picture (1/8)**
   - frame the problem
     - task: regression, classification, clustering, visualization?
     - benefit???
@@ -547,8 +547,30 @@ Evalutate Your System on the Test Set
         - Root Mean Squared Error (RMSE): Correspond to L2 norm, more sensitive to outliers than MSE, but generally performs better. -> seen errors appear LARGER than those in the MSE
 
           <img width="294" alt="image" src="https://github.com/user-attachments/assets/dc99ecad-003c-4848-a74a-69821a36fd34">
-
+            - all are the same as they were for the MAE
+ -** Getting the Data (2/8)  **         
     - data: how much is available?
     - what learning algo should you use?
     - how mcuh effort should be spent?
-      
+    - what assumptions were mead
+      - List and verify the assumptions that have been made so far for the model
+      - Does the downstream system convert the prices to categories. in this case you might need to do this earlier rather than later. check with the team that is responsible for the downstream stuff
+
+Mostly just running the colab file along with proff. 
+- Use cut to change histograms with long tails into more bell shaped curves. THis is how he does it in the google collab:
+
+        # Since this histogram is "tail heavy" (extends much farther to the right from the median and to the left)
+        # We will try to transform this atrribute to have a more bell-shaped distribution
+        housing["income_cat"] = pd.cut(housing["median_income"],
+                                       bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
+                                       labels=[1, 2, 3, 4, 5])
+
+- stratified sampling -> ensures you keep the important rations.
+
+            from sklearn.model_selection import StratifiedShuffleSplit
+        
+        split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+        for train_index, test_index in split.split(housing, housing["income_cat"]):
+            strat_train_set = housing.loc[train_index]
+            strat_test_set = housing.loc[test_index]
+
