@@ -126,7 +126,7 @@ This chapter is an example project end to end
 
 [2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#2-get-the-data)) Get the data.
 
-[3]()) Explore and visualize the data to gain insights.
+[3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#3-explore-and-visualize-the-data-to-gain-insights)) Explore and visualize the data to gain insights.
 
 [4]()) Prepare the data for machine learning algorithms.
 
