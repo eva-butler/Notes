@@ -4,7 +4,7 @@ Table of Contents:
     - Readings: [Chapter 1](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-1)
 - Module 2: [Fundamentals of ML](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-2-fundamentals-of-ml)
     - [Class 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-2-in-person)
-    - Readings: [Chapter 2]()
+    - Readings: [Chapter 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-2)
 
 
 # Module 1: Introduction to ML
