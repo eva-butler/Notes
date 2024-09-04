@@ -548,7 +548,7 @@ Evalutate Your System on the Test Set
 
           <img width="294" alt="image" src="https://github.com/user-attachments/assets/dc99ecad-003c-4848-a74a-69821a36fd34">
             - all are the same as they were for the MAE
- -** Getting the Data (2/8)  **         
+ - ** Getting the Data (2/8)  **         
     - data: how much is available?
     - what learning algo should you use?
     - how mcuh effort should be spent?
@@ -573,4 +573,13 @@ Mostly just running the colab file along with proff.
         for train_index, test_index in split.split(housing, housing["income_cat"]):
             strat_train_set = housing.loc[train_index]
             strat_test_set = housing.loc[test_index]
-
+- **Exploring and Visualizing the Data (3/8)**
+  - in collab notebook
+- **Cleaning the Data**
+  - takes the most of your time
+  - Imputers cannot work with the categorical data. so you need to get rid of the columns that are not numbers and then add later
+- what to do with the categorical data??
+  - Ordinal Encoder -> just going to put a number for each category...some ML algorithms will assume two near by values are more similar than two distant vaues. This is misleading. In some cases this might actually be helpful. But for something like OCean proximity, the order of the categories does not map directly to the numberial categories
+  - OneHotEncoder -> one attribute equal to 1 when the category is "< 1H OCEAN" (and 0 otherwise), another attribute equal to 1 when the category is “INLAND” (and 0 otherwise), and so on. This is called one-hot encoding, because only one attribute will be equal to 1 (hot), while the others will be 0 (cold).
+  - Custom Transformer:Although Scikit-Learn provides many useful transformers, you will need to write your own for tasks such as custom cleanup operations or combining specific attributes. You will want your transformer to work seamlessly with Scikit-Learn functionalities (such as pipelines), and since Scikit-Learn relies on duck typing (not inheritance), all you need is to create a class and implement three methods: fit() (returning self), transform(), and fit_transform(). You can get the last one for free by simply adding TransformerMixin as a base class.
+  - Standard Scalar: 
