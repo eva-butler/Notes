@@ -122,13 +122,20 @@ No Free Lunch Theorem: A model is a simplified representation of the data. The s
 ### Readings: Chapter 2
 This chapter is an example project end to end
 
-[1]()) Look at the big picture.
+[1](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#1-looking-at-the-big-picture)) Look at the big picture.
+
 [2]()) Get the data.
+
 [3]()) Explore and visualize the data to gain insights.
+
 [4]()) Prepare the data for machine learning algorithms.
+
 [5]()) Select a model and train it.
+
 [6]()) Fine-tune your model.
+
 [7]()) Present your solution.
+
 [8]()) Launch, monitor, and maintain your system.
 
  ####  (1) Looking at the Big Picture
