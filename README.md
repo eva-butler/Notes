@@ -6,6 +6,7 @@ Disclaimer: These notes are my personal interpretations and summaries of the mat
 
 # UVA Courses:
 - [Machine Learning CS 4774]()
+- [DMT2]()
 # Online Courses:
 - [Intro to Machine Learning Notes](https://github.com/eva-butler/Notes/blob/main/Intro_to_Machine_Learning.md)
 - [Intermediate Machine Learning Notes](https://github.com/eva-butler/Notes/blob/main/Intermediate_Machine_Learning.md)
