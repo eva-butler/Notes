@@ -8,5 +8,5 @@ Disclaimer: These notes are my personal interpretations and summaries of the mat
 - [Machine Learning CS 4774](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md)
 - [DMT2](https://github.com/eva-butler/Notes/blob/main/DMT2.md)
 # Online Courses:
-- [Intro to Machine Learning Notes](https://github.com/eva-butler/Notes/blob/main/Intro_to_Machine_Learning.md)
-- [Intermediate Machine Learning Notes](https://github.com/eva-butler/Notes/blob/main/Intermediate_Machine_Learning.md)
+- [Intro to Machine Learning](https://github.com/eva-butler/Notes/blob/main/Intro_to_Machine_Learning.md)
+- [Intermediate Machine Learning](https://github.com/eva-butler/Notes/blob/main/Intermediate_Machine_Learning.md)
