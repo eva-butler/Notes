@@ -575,7 +575,7 @@ Mostly just running the colab file along with proff.
             strat_test_set = housing.loc[test_index]
 - **Exploring and Visualizing the Data (3/8)**
   - in collab notebook
-- **Cleaning the Data**
+- **Cleaning the Data (4/8)**
   - takes the most of your time
   - Imputers cannot work with the categorical data. so you need to get rid of the columns that are not numbers and then add later
 - what to do with the categorical data??
@@ -583,3 +583,19 @@ Mostly just running the colab file along with proff.
   - OneHotEncoder -> one attribute equal to 1 when the category is "< 1H OCEAN" (and 0 otherwise), another attribute equal to 1 when the category is “INLAND” (and 0 otherwise), and so on. This is called one-hot encoding, because only one attribute will be equal to 1 (hot), while the others will be 0 (cold).
   - Custom Transformer:Although Scikit-Learn provides many useful transformers, you will need to write your own for tasks such as custom cleanup operations or combining specific attributes. You will want your transformer to work seamlessly with Scikit-Learn functionalities (such as pipelines), and since Scikit-Learn relies on duck typing (not inheritance), all you need is to create a class and implement three methods: fit() (returning self), transform(), and fit_transform(). You can get the last one for free by simply adding TransformerMixin as a base class.
   - Standard Scalar: 
+
+## Class 4 (in person)
+- **Prepare the data for Machine Learning Algorithms (aka Data Cleaning) (4/8)**
+  - make sure you remove the labels before building models
+  - can't build models if data has null values
+        
+          sample_incomplete_rows = housing[housing.isnull().any(axis=1)].head()
+        sample_incomplete_rows
+  - 1) remove data point [.dropna()], 2) remove feature [.drop()], 3) imputation [.fillna() or use the Imputer class]
+   
+  - OrdinalEncoder-> converts categories to numerical values (fit_transform)
+  - ^^^^^^
+
+## Select and Train a Model (5/8)
+
+these notes are all literally same as the reading so just refer to that
