@@ -7,7 +7,7 @@ Table of Contents:
   - Module 3: [End to end ML](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-3-end-to-end-ml)
     - Readings: [Chapter 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-2)
     - [Class 3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-3)
-  - Module 4: [Supervised Learning - Regression]()
+  - Module 4: [Supervised Learning - Regression](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-4-supervised-learning---regression)
     - [Class 4]()
  
 
