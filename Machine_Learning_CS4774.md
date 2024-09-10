@@ -8,7 +8,7 @@ Table of Contents:
     - Readings: [Chapter 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-2)
     - [Class 3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-3)
   - Module 4: [Supervised Learning - Regression](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-4-supervised-learning---regression)
-    - [Class 4]()
+    - [Class 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-5-in-person)
  
 
 # Module 1: Introduction to ML
@@ -587,25 +587,31 @@ Mostly just running the colab file along with proff.
   - Custom Transformer:Although Scikit-Learn provides many useful transformers, you will need to write your own for tasks such as custom cleanup operations or combining specific attributes. You will want your transformer to work seamlessly with Scikit-Learn functionalities (such as pipelines), and since Scikit-Learn relies on duck typing (not inheritance), all you need is to create a class and implement three methods: fit() (returning self), transform(), and fit_transform(). You can get the last one for free by simply adding TransformerMixin as a base class.
   - Standard Scalar: 
 
-## Class 4 (in person)
-- **Prepare the data for Machine Learning Algorithms (aka Data Cleaning) (4/8)**
-  - make sure you remove the labels before building models
-  - can't build models if data has null values
-        
-          sample_incomplete_rows = housing[housing.isnull().any(axis=1)].head()
-        sample_incomplete_rows
-  - 1) remove data point [.dropna()], 2) remove feature [.drop()], 3) imputation [.fillna() or use the Imputer class]
-   
-  - OrdinalEncoder-> converts categories to numerical values (fit_transform)
-  - ^^^^^^
-
-## Select and Train a Model (5/8)
-
-these notes are all literally same as the reading so just refer to that
-
-
 # Module 4: Supervised Learning - Regression 
+### Readings: Chapter 4
+
 
 ## Class 5 (in person)
+Data: From Table to Matrix
+- m-> rows, n-> features
 
+Linear Regression (Task)
+<img width="466" alt="image" src="https://github.com/user-attachments/assets/f100cd89-a446-485f-acb3-f817ce06e792">
+- x are the features and then they are associates with the model params theta
+<img width="464" alt="image" src="https://github.com/user-attachments/assets/1ac51fbb-5055-41d7-a136-3306d60f3c46">
+- it ends up being an equivalent form of a matrix multiplication
+- theta is the model predictor. You just multiply the data set with the parameter and you end up with your predictions
 
+<img width="457" alt="image" src="https://github.com/user-attachments/assets/537e2cb1-60b4-4669-8b7d-03a0342a9a34">
+- You can implement this equation in one line of code
+- inverting the matrix is n^3
+- once you build though it runs fast
+
+A Gradient-based Approach:
+- solution to a wide range of problems
+- calculate how much the loss function will change if we change the params a bit
+<img width="395" alt="image" src="https://github.com/user-attachments/assets/751a163d-0ad0-457b-bd7f-67795650659c">
+- i think its bsaically trying to determine the cost of going in each direction
+- there is a minus sign becasue you always want to be moving to the point at which the minimizing error point is. So if you are in an area with positive slope you will be subtracting from theta which will help you descend to the point that minimizes the error. Same for the other side
+- the learning rate determines your step size
+- 
