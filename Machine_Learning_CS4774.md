@@ -614,4 +614,16 @@ A Gradient-based Approach:
 - i think its bsaically trying to determine the cost of going in each direction
 - there is a minus sign becasue you always want to be moving to the point at which the minimizing error point is. So if you are in an area with positive slope you will be subtracting from theta which will help you descend to the point that minimizes the error. Same for the other side
 - the learning rate determines your step size
-- 
+<img width="455" alt="image" src="https://github.com/user-attachments/assets/773f62e6-12db-46a5-8eb5-70a7a296a964">
+- demonstrates how important it is to determine the learning rate
+- if MSE goes up with iterations, then your learning rate is too high
+USE CODE FROM COLAB 3 for ASSIGNMENT 1
+
+Stochastic Gradient Descent (SGD)
+- instead of using the whole training set, SGD picks a **single random example** in the training set at every step and compute the gradients based on that example.
+- It’s extremely fast, but is “stochastic” (random) in nature, its final parameter values are bounce around the minimum, which are good, but not optimal. Data point could be noisy which is no good
+
+Mini-Batch gradient descent
+- Instead of training on the full set (Batch GD) or based on just one sample (Scholastic GD), Mini-batch GD computes gradients on small random sets of samples (10-1000 in size) called mini-batches → best of both world
+
+<img width="463" alt="image" src="https://github.com/user-attachments/assets/48adc699-438d-4f0c-a741-ec298c0bc28b">
