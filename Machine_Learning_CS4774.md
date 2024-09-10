@@ -602,3 +602,10 @@ Mostly just running the colab file along with proff.
 ## Select and Train a Model (5/8)
 
 these notes are all literally same as the reading so just refer to that
+
+
+# Module 4: Supervised Learning - Regression 
+
+## Class 5 (in person)
+
+
