@@ -3,11 +3,13 @@ Table of Contents:
     - [Class 1](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-1-in-person)
     - Readings: [Chapter 1](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-1)
 - Module 2: [Fundamentals of ML](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-2-fundamentals-of-ml)
-    - [Class 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-2-in-person)
+    - [Class 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-2-in-person
+  - Module 3: [End to end ML]()
     - Readings: [Chapter 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-2)
-    - [Class 3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-3) 
+    - [Class 3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-3)
+  - Module 4: [Supervised Learning - Regression]()
     - [Class 4]()
-
+ 
 
 # Module 1: Introduction to ML
 
