@@ -123,6 +123,7 @@ No Free Lunch Theorem: A model is a simplified representation of the data. The s
                - NO FREE LUNCH THEOREM (NFL) : a model is just a simplifed version of observerations of data. (ASSUMPTIONS) If you make no assumptions about data, then there is no reason to prefer one model over another.
                -  hypothesis space: the set of functions that the learning data algortihm us allowed to select as being the solution
 
+# Module 3: End to End ML
 ### Readings: Chapter 2
 This chapter is an example project end to end
 
