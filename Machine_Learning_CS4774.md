@@ -7,8 +7,13 @@ Table of Contents:
   - Module 3: [End to end ML](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-3-end-to-end-ml)
     - Readings: [Chapter 2](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-2)
     - [Class 3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-3)
-  - Module 4: [Supervised Learning - Regression](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-4-supervised-learning---regression)
+- Module 4: [Supervised Learning - Regression](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-4-supervised-learning---regression)
+    - Reading: [Chapter 4]()
     - [Class 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-5-in-person)
+- Module 5/6: [Supervised Learning and Classification]()
+  - Reading: [Chapter 3]()
+  - [Class 6: Classification]()
+  - [Class 7]()
  
 
 # Module 1: Introduction to ML
@@ -627,3 +632,19 @@ Mini-Batch gradient descent
 - Instead of training on the full set (Batch GD) or based on just one sample (Scholastic GD), Mini-batch GD computes gradients on small random sets of samples (10-1000 in size) called mini-batches → best of both world
 
 <img width="463" alt="image" src="https://github.com/user-attachments/assets/48adc699-438d-4f0c-a741-ec298c0bc28b">
+
+
+# Module 5/6: Supervised Learning - Classification
+
+## Class 6: Classification Problems
+<img width="446" alt="image" src="https://github.com/user-attachments/assets/6907a651-ccff-498c-b1e5-e603704eb629">
+<img width="466" alt="image" src="https://github.com/user-attachments/assets/97a8bd31-fecc-4523-85fe-d2761f110653">
+- this is actually a really terrible classifier
+- evaluating classifiers are a bit trickier than a regressor
+- we will need to use things like the Confusion Matrix, Precision and Recall, F-1 Score, ROC curve, and Area under the ROC
+
+**just watch the videos for this section**
+
+
+
+
