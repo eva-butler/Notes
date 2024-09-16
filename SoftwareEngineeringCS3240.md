@@ -58,9 +58,9 @@ MODELS:
 - other families of approaches
 
 
-# Django Practice:
+## Django Practice:
 
-## part 1)
+### part 1)
 - django-admin startproject mysite
 begin the project
 These files are:
@@ -110,7 +110,7 @@ path()
   - view: When Django finds a matching pattern, it calls the specified view function with an HttpRequest object as the first argument and any “captured” values from the route as keyword arguments.
   - name: Naming your URL lets you refer to it unambiguously from elsewhere in Django, especially from within templates. This powerful feature allows you to make global changes to the URL patterns of your project while only touching a single file.
  
-## part 2) Database set up
+### part 2) Database set up
 
 settings.py
 - TIME_ZONE: set it when u edit
@@ -280,5 +280,88 @@ Introducing the Django Admin
   - this makes the poll modifyable in the admin
 
 
-  ## part 3)
-  
+  ### part 3)
+
+- A view is a “type” of web page in your Django application that generally serves a specific function and has a specific template. For example, in a blog application, you might have the following views:
+
+- Blog homepage – displays the latest few entries.
+- Entry “detail” page – permalink page for a single entry.
+- year-based archive page – displays all months with entries in the given year.
+- Month-based archive page – displays all days with entries in the given month.
+- Day-based archive page – displays all entries in the given day.
+- Comment action – handles posting comments to a given entry.
+- In our poll application, we’ll have the following four views:
+  - Question “index” page – displays the latest few questions
+  - Question “detail” page – displays a question text, with no results but with a form to vote.
+  - Question “results” page – displays results for a particular question.
+  - Vote action – handles voting for a part
+
+- Each view is represented by a python function
+
+Writing more views:
+
+Adding more views and updating path:
+    
+    from django.urls import path
+    
+    from . import views
+    
+    def detail(request, question_id):
+        return HttpResponse("You're looking at question %s." % question_id)
+    
+    
+    def results(request, question_id):
+        response = "You're looking at the results of question %s."
+        return HttpResponse(response % question_id)
+    
+    
+    def vote(request, question_id):
+        return HttpResponse("You're voting on question %s." % question_id)
+
+    urlpatterns = [
+        # ex: /polls/
+        path("", views.index, name="index"),
+        # ex: /polls/5/
+        path("<int:question_id>/", views.detail, name="detail"),
+        # ex: /polls/5/results/
+        path("<int:question_id>/results/", views.results, name="results"),
+        # ex: /polls/5/vote/
+        path("<int:question_id>/vote/", views.vote, name="vote"),
+    ]
+
+The question_id=34 part comes from <int:question_id>. Using angle brackets “captures” part of the URL and sends it as a keyword argument to the view function. The question_id part of the string defines the name that will be used to identify the matched pattern, and the int part is a converter that determines what patterns should match this part of the URL path. The colon (:) separates the converter and pattern name.
+
+Write views that actually do something
+- Each view is responsible for doing one of two things: returning an HttpResponse object containing the content for the requested page, or raising an exception such as Http404. The rest is up to you.
+- Your project’s TEMPLATES setting describes how Django will load and render templates. The default settings file configures a DjangoTemplates backend whose APP_DIRS option is set to True. By convention DjangoTemplates looks for a “templates” subdirectory in each of the INSTALLED_APPS.
+- Template namespacing: Now we might be able to get away with putting our templates directly in polls/templates (rather than creating another polls subdirectory), but it would actually be a bad idea. Django will choose the first template it finds whose name matches, and if you had a template with the same name in a different application, Django would be unable to distinguish between them. We need to be able to point Django at the right one, and the best way to ensure this is by namespacing them. That is, by putting those templates inside another directory named for the application itself.
+
+render(): The render() function takes the request object as its first argument, a template name as its second argument and a dictionary as its optional third argument. It returns an HttpResponse object of the given template rendered with the given context.
+
+    from django.shortcuts import render
+    
+    from .models import Question
+    
+    
+    def index(request):
+        latest_question_list = Question.objects.order_by("-pub_date")[:5]
+        context = {"latest_question_list": latest_question_list}
+        return render(request, "polls/index.html", context)
+
+Raising 404 errors:
+
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, "polls/detail.html", {"question": question})
+
+get_object_or_404() :takes a Django model as its first argument and an arbitrary number of keyword arguments, which it passes to the get() function of the model’s manager. It raises Http404 if the object doesn’t exist.
+
+    def detail(request, question_id):
+        question = get_object_or_404(Question, pk=question_id)
+        return render(request, "polls/detail.html", {"question": question})
+
+The Template System:
+
