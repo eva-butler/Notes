@@ -511,3 +511,8 @@ Adding a Background Image
 li a {
     color: green;
 }
+
+
+
+## part 7) 
+Customizing the Admin form
