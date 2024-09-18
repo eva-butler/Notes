@@ -430,3 +430,84 @@ Writing a new Vote Function:
 
 - Similarly, the ListView generic view uses a default template called <app name>/<model name>_list.html; we use template_name to tell ListView to use our existing "polls/index.html" template.
 
+## part 5)
+Introduced automated testing
+
+This is the first test we are going to try to catch the error of future questions being considered published recently
+    
+    import datetime
+    
+    from django.test import TestCase
+    from django.utils import timezone
+    
+    from .models import Question
+    
+    
+    class QuestionModelTests(TestCase):
+        def test_was_published_recently_with_future_question(self):
+            """
+            was_published_recently() returns False for questions whose pub_date
+            is in the future.
+            """
+            time = timezone.now() + datetime.timedelta(days=30)
+            future_question = Question(pub_date=time)
+            self.assertIs(future_question.was_published_recently(), False)
+
+- Here we have created a django.test.TestCase subclass with a method that creates a Question instance with a pub_date in the future. We then check the output of was_published_recently() - which ought to be False.
+- What happened is this:
+  - manage.py test polls looked for tests in the polls application
+  - it found a subclass of the django.test.TestCase class
+  - it created a special database for the purpose of testing
+  - it looked for test methods - ones whose names begin with test
+  - in test_was_published_recently_with_future_question it created a Question instance whose pub_date field is 30 days in the future
+  - and using the assertIs() method, it discovered that its was_published_recently() returns True, though we wanted it to return False
+
+The Django Test Client
+- Django provides a test Client to simulate a user interacting with the code at the view level. We can use it in tests.py or even in the shell.
+- We will start again with the shell, where we need to do a couple of things that won’t be necessary in tests.py. The first is to set up the test environment in the shell:
+
+      >>> from django.test.utils import setup_test_environment
+      >>> setup_test_environment()
+
+- setup_test_environment() installs a template renderer which will allow us to examine some additional attributes on responses such as response.context that otherwise wouldn’t be available. Note that this method does not set up a test database, so the following will be run against the existing database and the output may differ slightly depending on what questions you already created. You might get unexpected results if your TIME_ZONE in settings.py isn’t correct. If you don’t remember setting it earlier, check it before continuing.
+      
+      >>> from django.test import Client
+      >>> # create an instance of the client for our use
+      >>> client = Client()
+      >>> >>> # get a response from '/'
+      >>> response = client.get("/")
+      Not Found: /
+      >>> # we should expect a 404 from that address; if you instead see an
+      >>> # "Invalid HTTP_HOST header" error and a 400 response, you probably
+      >>> # omitted the setup_test_environment() call described earlier.
+      >>> response.status_code
+      404
+      >>> # on the other hand we should expect to find something at '/polls/'
+      >>> # we'll use 'reverse()' rather than a hardcoded URL
+      >>> from django.urls import reverse
+      >>> response = client.get(reverse("polls:index"))
+      >>> response.status_code
+      200
+      >>> response.content
+      b'\n    <ul>\n    \n        <li><a href="/polls/1/">What&#x27;s up?</a></li>\n    \n    </ul>\n\n'
+      >>> response.context["latest_question_list"]
+      <QuerySet [<Question: What's up?>]>
+
+## part 6)
+Customizing the Apps Look and Feel 
+- First, create a directory called static in your polls directory. Django will look for static files there, similarly to how Django finds templates inside polls/templates/.
+
+- Django’s STATICFILES_FINDERS setting contains a list of finders that know how to discover static files from various sources. One of the defaults is AppDirectoriesFinder which looks for a “static” subdirectory in each of the INSTALLED_APPS, like the one in polls we just created. The admin site uses the same directory structure for its static files.
+
+- Within the static directory you have just created, create another directory called polls and within that create a file called style.css. In other words, your stylesheet should be at polls/static/polls/style.css. Because of how the AppDirectoriesFinder staticfile finder works, you can refer to this static file in Django as polls/style.css, similar to how you reference the path for templates.
+
+Adding a Background Image
+
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
+li a {
+    color: green;
+}
