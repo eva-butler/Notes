@@ -363,5 +363,70 @@ get_object_or_404() :takes a Django model as its first argument and an arbitrary
         question = get_object_or_404(Question, pk=question_id)
         return render(request, "polls/detail.html", {"question": question})
 
-The Template System:
+
+## Part 4)
+- Html form element:
+
+      <form action="{% url 'polls:vote' question.id %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <legend><h1>{{ question.question_text }}</h1></legend>
+          {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+          {% for choice in question.choice_set.all %}
+              <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+              <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+          {% endfor %}
+      </fieldset>
+      <input type="submit" value="Vote">
+      </form>
+- The above template displays a radio button for each question choice. The value of each radio button is the associated question choice’s ID. The name of each radio button is "choice". That means, when somebody selects one of the radio buttons and submits the form, it’ll send the POST data choice=# where # is the ID of the selected choice. This is the basic concept of HTML forms.
+- We set the form’s action to {% url 'polls:vote' question.id %}, and we set method="post". Using method="post" (as opposed to method="get") is very important, because the act of submitting this form will alter data server-side. Whenever you create a form that alters data server-side, use method="post". This tip isn’t specific to Django; it’s good web development practice in general.
+- forloop.counter indicates how many times the for tag has gone through its loop
+
+Writing a new Vote Function:
+
+      def vote(request, question_id):
+          question = get_object_or_404(Question, pk=question_id)
+          try:
+              selected_choice = question.choice_set.get(pk=request.POST["choice"])
+          except (KeyError, Choice.DoesNotExist):
+              # Redisplay the question voting form.
+              return render(
+                  request,
+                  "polls/detail.html",
+                  {
+                      "question": question,
+                      "error_message": "You didn't select a choice.",
+                  },
+              )
+          else:
+              selected_choice.votes = F("votes") + 1
+              selected_choice.save()
+          return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+- request.POST is a dictionary-like object that lets you access submitted data by key name. In this case, request.POST['choice'] returns the ID of the selected choice, as a string. request.POST values are always strings.
+
+- Note that Django also provides request.GET for accessing GET data in the same way – but we’re explicitly using request.POST in our code, to ensure that data is only altered via a POST call.
+
+- request.POST['choice'] will raise KeyError if choice wasn’t provided in POST data. The above code checks for KeyError and redisplays the question form with an error message if choice isn’t given.
+
+- F("votes") + 1 instructs the database to increase the vote count by 1.
+
+- After incrementing the choice count, the code returns an HttpResponseRedirect rather than a normal HttpResponse. HttpResponseRedirect takes a single argument: the URL to which the user will be redirected (see the following point for how we construct the URL in this case).
+
+- As the Python comment above points out, you should always return an HttpResponseRedirect after successfully dealing with POST data. This tip isn’t specific to Django; it’s good web development practice in general.
+
+- We are using the reverse() function in the HttpResponseRedirect constructor in this example. This function helps avoid having to hardcode a URL in the view function. It is given the name of the view that we want to pass control to and the variable portion of the URL pattern that points to that view. In this case, using the URLconf we set up in Tutorial 3, this reverse() call will return a string like
+
+ Using Generic Views: The less code the better
+- Let’s convert our poll app to use the generic views system, so we can delete a bunch of our own code. We’ll have to take a few steps to make the conversion. We will:
+  - Convert the URLconf.
+  - Delete some of the old, unneeded views.
+  - Introduce new views based on Django’s generic views.
+ 
+- Each generic view needs to know what model it will be acting upon. This is provided using either the model attribute (in this example, model = Question for DetailView and ResultsView) or by defining the get_queryset() method (as shown in IndexView).
+
+- By default, the DetailView generic view uses a template called <app name>/<model name>_detail.html. In our case, it would use the template "polls/question_detail.html". The template_name attribute is used to tell Django to use a specific template name instead of the autogenerated default template name. We also specify the template_name for the results list view – this ensures that the results view and the detail view have a different appearance when rendered, even though they’re both a DetailView behind the scenes.
+
+- Similarly, the ListView generic view uses a default template called <app name>/<model name>_list.html; we use template_name to tell ListView to use our existing "polls/index.html" template.
 
