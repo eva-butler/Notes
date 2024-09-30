@@ -10,10 +10,22 @@ Table of Contents:
 - Module 4: [Supervised Learning - Regression](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-4-supervised-learning---regression)
     - Reading: [Chapter 4]()
     - [Class 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-5-in-person)
+    - [Video Notes]()
 - Module 5/6: [Supervised Learning and Classification]()
   - Reading: [Chapter 3]()
-  - [Class 6: Classification]()
-  - [Class 7]()
+  - [Lecture 5](): Classification
+  - [Lecture 6](): Logisitic Regression
+- Module 7: [Unsupervised Learning]()
+  - Reading: [Chapter 9]()
+  - [Lecture 7](): Clustering Methods HAC and k-means
+- Module 8: [Decision Tree Learning]()
+  - Reading: [Chapter 6]()
+  - [Lecture 8](): Decision Trees
+- Module 10: [Analogical Learning]()
+  - Reading: [Chapter 5]()
+  - [Lecture 10a]()
+  - [Lecture 10b]()
+- [MIDTERM REVIEW]()
  
 
 # Module 1: Introduction to ML
