@@ -1351,3 +1351,87 @@ Gradient Descent Step:
 <img width="205" alt="image" src="https://github.com/user-attachments/assets/c3bb96b3-54fc-49c8-bfde-dcff2dfbb3e1">
 - batch you use all of training for X and y, minibatch you use a subset for X and y, and for the last one you do one at a time. 
 
+# Module 7: Unsupervised Learning
+
+## Reading Chapter 9
+
+## Lecture 7 Videos: Clustering Methods HAC and k-means
+
+### Video 7.1: Similarity Measures
+- its hard to describe what the similarities are. especially for a computer
+- its easier to think of it in terms of the distance between vectors.
+
+Distance Measures:
+<img width="491" alt="image" src="https://github.com/user-attachments/assets/e30a4a6c-7bb0-4fe9-a7a0-ef437f90c246">
+- Minkowski Metric
+  - <img width="347" alt="image" src="https://github.com/user-attachments/assets/3dab1849-14ec-46e0-b4bf-b4cfefacf874">
+  - <img width="368" alt="image" src="https://github.com/user-attachments/assets/316ce1dd-b98b-41f9-a32e-f38708138415">
+  - Example:
+    - <img width="336" alt="image" src="https://github.com/user-attachments/assets/9207f2c7-2815-4466-b1df-43df8756634a">
+- Hamming Distance:
+  - <img width="505" alt="image" src="https://github.com/user-attachments/assets/9a901449-c187-4498-8a20-f8e188237a60">
+- Edit/Transform Distance:
+  - To measure the similarity between two objects, transform one object into the the other, and measure the effort it takes.
+  - <img width="467" alt="image" src="https://github.com/user-attachments/assets/f14c6e5b-8e4d-4742-ba1c-9960695518f3">
+
+
+### Video 7.2: Hierarchical Clustering (HAC)
+There are 2 different types of Clustering Algs:
+- Hierarchical alg:
+  - bottom up- agglomerative
+  - top-down: divisive
+- Partitional Algs:
+  - Usually start with a random (partial) partitioning
+  - Refine it iteratively (K-means)
+
+Hierarchical Clustering:
+-Dendogram:
+<img width="583" alt="image" src="https://github.com/user-attachments/assets/8ce0bee1-42b8-42b8-a1d8-6becf0248d1d">
+- crazy number of dendogram combos
+- not a very scalable way to do things
+- start with each item on its own cluster, and then find the next best item to join together into a cluster:
+- Bottom Up approachL
+  - begin with a distance matrix which contains the disteances between each pair of objects.
+  - You consider all possible merges from the base case.
+  - You simply pick the best. Its greedy in a way.
+  - <img width="340" alt="image" src="https://github.com/user-attachments/assets/52e1e7e4-5f4b-446a-85a1-327fe119ecc7">
+  - <img width="262" alt="image" src="https://github.com/user-attachments/assets/72d52ff3-a16f-4522-a334-03314274d8ce">
+  - <img width="583" alt="image" src="https://github.com/user-attachments/assets/fc1116a9-c17f-460f-bd85-37c41ae2c5bd">
+
+- Numerical Example:
+  - <img width="383" alt="image" src="https://github.com/user-attachments/assets/1bbc157d-6d8d-4cfb-b5a3-874a42a42ae1">
+
+- Complexity of HAC:
+  - In the first iteration, it takes a lot to compute those values O(m^2 n)
+  - Compute the distance between the most recently created cluster and all existing clusters O(mn)
+  - Maintain a min-heap to find the smalled pair O(mn logm)
+  - Since step 2,3 needs to be done in each subsequence. merging O(m^2 n log m)
+  - It does not scale well O(m^2 n log m) with local optima.
+### Video 7.3: DBSCAN and other clustering methods
+- DBSCAN:
+  - Density based spatial clustering of applications with noise is another clustering alg which is based on loca, density estimation
+  - Simple yet powerful alg which allows identification of arbitrary shapes
+  - Works well if all the clusters are desnse engouh and well seperated by low-density region.
+  - <img width="586" alt="image" src="https://github.com/user-attachments/assets/e9b3c682-6b27-4cfc-97d6-d455e321d9be">
+  - <img width="574" alt="image" src="https://github.com/user-attachments/assets/335cc0d5-1659-4f2a-a09c-a7169c0322a2">
+- Complexity:
+  - has two hyperparams (eps and min_samples)
+  - computationsal complex. is roughly O(mlogm)
+  - if esp is large, it may require up to O(m^2) memory
+<img width="563" alt="image" src="https://github.com/user-attachments/assets/274292cf-d411-4e60-95c4-f511f94c8f26">
+- (not tested on these algs)
+
+### Slides from Clustering:
+<img width="437" alt="image" src="https://github.com/user-attachments/assets/3f3ffa63-af3e-49eb-9f2d-24d447c92df5">
+
+Partition Clustering (K-means)
+- construct a partition of m objects into a set of k clusters.
+
+
+
+
+
+
+
+
+
