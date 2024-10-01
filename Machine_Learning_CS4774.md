@@ -669,7 +669,146 @@ when using GPUs.
 
 
 Polynomial Regression:
+- you can use linear model to fit nonlinear dat
+- A simple way to do this is to
+add powers of each feature as new features, then train a linear model on this extended
+set of features. This technique is called Polynomial Regression.
+- <img width="506" alt="image" src="https://github.com/user-attachments/assets/280ff306-314c-4257-8e6d-8947db0cc2ce">
 
+Learning Curves:
+- Another way is to look at the learning curves: these are plots of the model’s perfor‐
+mance on the training set and the validation set as a function of the training set size
+(or the training iteration). To generate the plots, simply train the model several times
+on different sized subsets of the training set. The following code defines a function
+that plots the learning curves of a model given some training data:
+- <img width="486" alt="image" src="https://github.com/user-attachments/assets/8cac3aa9-6425-444e-8944-6500ab55d3ed">
+- Underfitting model:
+- <img width="554" alt="image" src="https://github.com/user-attachments/assets/34be580e-10d8-46c4-8585-ebed920607dc">
+- Overfitting Model:
+- <img width="536" alt="image" src="https://github.com/user-attachments/assets/7f7c2dc6-2e84-4e04-ad9a-c2322f3e1c05">
+
+
+Regularized Linear Models:
+- reduces over fitting
+- the fewer degrees of freedom, the harder it is to overfit the data
+
+Ridge Regression:
+Ridge Regression (also called Tikhonov regularization) is a regularized version of Lin‐
+ear Regression: a regularization term equal to α∑n to i = 1 | θi^2 is added to the cost function.
+This forces the learning algorithm to not only fit the data but also keep the model
+weights as small as possible. Note that the regularization term should only be added
+to the cost function during training. Once the model is trained, you want to evaluate
+the model’s performance using the unregularized performance measure
+<img width="335" alt="image" src="https://github.com/user-attachments/assets/52f70617-6e13-4ecc-a9a1-a5f8a68d15c9">
+<img width="557" alt="image" src="https://github.com/user-attachments/assets/f21a6200-c6a4-420c-928d-32781939f080">
+
+Lasso Regression:
+- Least Absolute Shrinkage and Selection Operator Regression (simply called Lasso
+Regression) is another regularized version of Linear Regression: just like Ridge
+Regression, it adds a regularization term to the cost function, but it uses the ℓ1 norm
+of the weight vector instead of half the square of the ℓ2 norm
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/346eeb29-fef6-47df-85ce-ec8aba6d2a55">
+<img width="532" alt="image" src="https://github.com/user-attachments/assets/1dd4c8f5-3a85-4b31-80a2-275962c3375f">
+
+Elastic Net:
+- Elastic Net is a middle ground between Ridge Regression and Lasso Regression. The
+regularization term is a simple mix of both Ridge and Lasso’s regularization terms,
+and you can control the mix ratio r. When r = 0, Elastic Net is equivalent to Ridge
+Regression, and when r = 1, it is equivalent to Lasso Regression
+<img width="365" alt="image" src="https://github.com/user-attachments/assets/23e6d1fa-d3ba-4f58-a03c-cb3f44a1dff1">
+<img width="528" alt="image" src="https://github.com/user-attachments/assets/01f8f99b-bbc4-49c1-9ba4-7f7362c08536">
+
+
+- So when should you use plain Linear Regression (i.e., without any regularization),
+Ridge, Lasso, or Elastic Net? It is almost always preferable to have at least a little bit of
+regularization, so generally you should avoid plain Linear Regression. Ridge is a good
+default, but if you suspect that only a few features are actually useful, you should pre‐
+fer Lasso or Elastic Net since they tend to reduce the useless features’ weights down to
+zero as we have discussed. In general, Elastic Net is preferred over Lasso since Lasso
+may behave erratically when the number of features is greater than the number of
+training instances or when several features are strongly correlated.
+
+Early Stopping
+- A very different way to regularize iterative learning algorithms such as Gradient
+Descent is to stop training as soon as the validation error reaches a minimum. This is
+called early stopping
+<img width="536" alt="image" src="https://github.com/user-attachments/assets/ef5ad53a-9d97-4776-9a8a-54adef493d54">
+<img width="540" alt="image" src="https://github.com/user-attachments/assets/da2dcdb0-2df2-439f-a58b-6bf41fc08f20">
+
+Logistic Regression:
+-  Logistic Regression (also called Logit Regression) is com‐
+monly used to estimate the probability that an instance belongs to a particular class
+(e.g., what is the probability that this email is spam?). If the estimated probability is
+greater than 50%, then the model predicts that the instance belongs to that class
+(called the positive class, labeled “1”), or else it predicts that it does not (i.e., it
+belongs to the negative class, labeled “0”). This makes it a binary classifier.
+
+Estimating Probabilities:
+- a Logistic Regression
+model computes a weighted sum of the input features (plus a bias term), but instead
+of outputting the result directly like the Linear Regression model does, it outputs the
+logistic of this result
+<img width="504" alt="image" src="https://github.com/user-attachments/assets/2ef1258b-a4b5-498d-a8bc-162992ade4b3">
+<img width="296" alt="image" src="https://github.com/user-attachments/assets/a9bb69c2-6b8a-45a1-9c81-2e8cc1643379">
+- The logistic—also called the logit, noted σ(·)—is a sigmoid function (i.e., S-shaped)
+that outputs a number between 0 and 1. 
+<img width="382" alt="image" src="https://github.com/user-attachments/assets/b00de3a2-3282-4b5a-9a59-9f880cef3732">
+
+Training and Cost function:
+- The objective of training is to set the param‐
+eter vector θ so that the model estimates high probabilities for positive instances (y = 1) and low probabilities for negative instances (y = 0).
+- <img width="437" alt="image" src="https://github.com/user-attachments/assets/5d739574-6b03-4820-aa0f-927b48155e59">
+- This cost function makes sense because – log(t) grows very large when t approaches
+0, so the cost will be large if the model estimates a probability close to 0 for a positive
+instance, and it will also be very large if the model estimates a probability close to 1
+for a negative instance. On the other hand, – log(t) is close to 0 when t is close to 1, so
+the cost will be close to 0 if the estimated probability is close to 0 for a negative
+instance or close to 1 for a positive instance, which is precisely what we want.
+
+- The cost function over the whole training set is simply the average cost over all train‐
+ing instances
+<img width="361" alt="image" src="https://github.com/user-attachments/assets/fe392b3e-ed6d-4743-8edd-b76e310dc1cd">
+<img width="374" alt="image" src="https://github.com/user-attachments/assets/a0d18105-eea3-4460-97aa-1bc61a753123">
+- using gradient descent to determine what minimizies the cost function
+
+Decision Boundaries:
+- <img width="533" alt="image" src="https://github.com/user-attachments/assets/a2fe1277-c3e0-4c52-892a-22bf653723d5">
+- just to get an idea of what a decision boundary looks like
+
+Softmax Regression:
+- The Logistic Regression model can be generalized to support multiple classes directly,
+without having to train and combine multiple binary classifiers (as discussed in
+Chapter 3). This is called Somax Regression, or Multinomial Logistic Regression
+- The idea is quite simple: when given an instance x, the Softmax Regression model
+first computes a score sk(x) for each class k, then estimates the probability of each
+class by applying the somax function (also called the normalized exponential) to the
+scores.
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/2d00c52e-ea18-4527-b149-2f8cdd9a9c0e">
+<img width="233" alt="image" src="https://github.com/user-attachments/assets/e21f5f21-ca25-4587-99bb-750d3a92fdd1">
+• K is the number of classes.
+• s(x) is a vector containing the scores of each class for the instance x.
+• σ(s(x))k
+ is the estimated probability that t
+<img width="388" alt="image" src="https://github.com/user-attachments/assets/a1f31df7-b387-4cba-a4a9-99f8afc835e2">
+- Now that you know how the model estimates probabilities and makes predictions,
+let’s take a look at training. The objective is to have a model that estimates a high
+probability for the target class (and consequently a low probability for the other
+classes). Minimizing the cost function shown in Equation 4-22, called the cross
+entropy, should lead to this objective because it penalizes the model when it estimates a low probability for a target class. Cross entropy is frequently used to measure how
+well a set of estimated class probabilities match the target classes
+- <img width="515" alt="image" src="https://github.com/user-attachments/assets/d097cefb-5f40-4032-97e9-844c498a46f9">
+- <img width="515" alt="image" src="https://github.com/user-attachments/assets/7e1b3580-f99d-4ea4-8a1d-18598343ff5f">
+- Now you can compute the gradient vector for every class, then use Gradient Descent
+(or any other optimization algorithm) to find the parameter matrix Θ that minimizes
+the cost function
+- Let’s use Softmax Regression to classify the iris flowers into all three classes. ScikitLearn’s LogisticRegression uses one-versus-all by default when you train it on more
+than two classes, but you can set the multi_class hyperparameter to "multinomial"
+to switch it to Softmax Regression instead. You must also specify a solver that sup‐
+ports Softmax Regression, such as the "lbfgs" solver (see Scikit-Learn’s documenta‐
+tion for more details). It also applies ℓ2 regularization by default, which you can control using the hyperparameter C.
+<img width="526" alt="image" src="https://github.com/user-attachments/assets/5a9882bd-6e04-4096-9d27-25f6c7a5ca8a">
+- Decision oundaries:
+<img width="536" alt="image" src="https://github.com/user-attachments/assets/61f389f3-8a2b-42ea-bb6b-490ceb19678c">
 
 
 
