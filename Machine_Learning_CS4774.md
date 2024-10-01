@@ -814,6 +814,73 @@ tion for more details). It also applies ℓ2 regularization by default, which yo
 ## Video Notes:
 
 ### Video 4.1: Optimizing Model Parameters
+- You can transform a table into a matrix so that we can do math on it
+- a single row is a data point. Can consist of many different features that are for a single example.
+- We also have the label for the example labeled y
+- we have m examples and n features.
+- We use subscripts to denote the identity of the features.
+<img width="305" alt="image" src="https://github.com/user-attachments/assets/ddcf17e9-307c-42b7-87d2-5a1889ccc92e">
+
+Task: Linear Regression:
+- we have the generalized linear model:
+<img width="306" alt="image" src="https://github.com/user-attachments/assets/72a254d4-321f-4e62-97f9-2cbe1aa7f7d7">
+- x0 is always equal to one because theta 0 is going to be the biased term.
+- we can also write it in the vector form:
+<img width="288" alt="image" src="https://github.com/user-attachments/assets/51f368ef-476b-4464-9298-cdbb2b5b1814">
+Representation: Linear function: h(theta) : X -> y
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/2272701c-28f4-46eb-b5d4-a54d1fe18812">
+- we need to learn theta. in order to do this we are going to learn theta using a loss function and we want theta to be the point at which it is minimized.
+
+Loss Function-> MSE
+<img width="293" alt="image" src="https://github.com/user-attachments/assets/8fcbbaf9-fc63-41b8-99f8-53ab389e0c1d">
+
+minimizing the function:
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/e5045359-6785-47cb-877e-8dd676c3512b">
+- we can go a little further:
+<img width="308" alt="image" src="https://github.com/user-attachments/assets/51b0c058-8d6d-4e21-807d-595958585abe">
+Optimization Procedure:
+- we now want to minimize the function J. To do this you take the partial derivative with respect to the parameter of the function and then setting it equal to 0
+<img width="292" alt="image" src="https://github.com/user-attachments/assets/3e2e50e0-d6f7-4ca2-b626-210624577110">
+
+NORMAL EQUATION:
+<img width="299" alt="image" src="https://github.com/user-attachments/assets/7e5af061-43a2-4a5d-949f-ed0cbf3b48f0">
+
+Computational Complexity:
+<img width="305" alt="image" src="https://github.com/user-attachments/assets/f2dd9c6c-b694-47fd-a5db-3e419948a4c3">
+<img width="296" alt="image" src="https://github.com/user-attachments/assets/19aa00c9-34b6-4ef7-9d99-5cb7377722c3">
+
+### Video 4.2: Alternative Optimization: Gradient Based Approach
+- the gradient will tell you how far to go in the direction of fastest descent
+
+Gradient Descent (GD): 
+- an optimization alg. to find solution
+<img width="311" alt="image" src="https://github.com/user-attachments/assets/e33f9f4d-3804-4d10-836a-c4b83b7bcfa9">
+
+Batch Gradient Descent (BGD):
+- tweak the parameters iteratively in order to minimize the loss functino
+- You use ALL of the training data. (BATCH)
+- determined by the learning rate
+<img width="271" alt="image" src="https://github.com/user-attachments/assets/2f39fa57-6156-4585-85fd-c762782247a9">
+- Gradient Descent works better when your features are all scaled. It makes it work much faster and the descent is much faster.
+- FORMULAS:
+<img width="292" alt="image" src="https://github.com/user-attachments/assets/c2ca748d-8ba4-4f78-a509-4f15ff6c3f1e">
+^this is all for a single direction theta j
+- now we want to generalize and look at all directions so we can calculate the graident vector:
+<img width="301" alt="image" src="https://github.com/user-attachments/assets/86e81dba-6ae5-413f-a938-b7981b4c3553">
+Gradient Descent Step:
+<img width="277" alt="image" src="https://github.com/user-attachments/assets/14af58ec-c59f-4044-b475-adb67323108c">
+
+Stochastic Gradient Descent (SGD):
+- instead of using the entire training set, we just pick a random group of the training data and computes the gradients at each step.
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/55002742-c7df-4a2e-a2cb-22c340a7bfda">
+
+Mini-bath Gradient Descent:
+- sort of a compromise between the two. speeds up the training process and not quiet as random:
+<img width="299" alt="image" src="https://github.com/user-attachments/assets/fad56119-32ad-4368-abe7-3470c2f47cc1">
+
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/e62fc4d5-1b96-40d2-a505-fe1de96b5c3c">
+- Noraml is our closed form 
+
 
 
 ## Class 5 (in person)
