@@ -12,9 +12,9 @@ Table of Contents:
     - [Class 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-5-in-person)
     - [Video Notes](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#video-notes)
 - Module 5/6: [Supervised Learning and Classification](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-56-supervised-learning---classification)
-  - Reading: [Chapter 3]()
-  - [Lecture 5](): Classification
-  - [Lecture 6](): Logisitic Regression
+  - Reading: [Chapter 3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#reading-chapter-3)
+  - [Lecture 5 Videos](): Classification
+  - [Lecture 6 Videos](): Logisitic Regression
 - Module 7: [Unsupervised Learning]()
   - Reading: [Chapter 9]()
   - [Lecture 7](): Clustering Methods HAC and k-means
