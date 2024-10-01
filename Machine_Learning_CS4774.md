@@ -811,6 +811,9 @@ tion for more details). It also applies ℓ2 regularization by default, which yo
 <img width="536" alt="image" src="https://github.com/user-attachments/assets/61f389f3-8a2b-42ea-bb6b-490ceb19678c">
 
 
+## Video Notes:
+
+### Video 4.1: Optimizing Model Parameters
 
 
 ## Class 5 (in person)
