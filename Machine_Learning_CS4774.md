@@ -11,7 +11,7 @@ Table of Contents:
     - Reading: [Chapter 4](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-4)
     - [Class 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-5-in-person)
     - [Video Notes](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#video-notes)
-- Module 5/6: [Supervised Learning and Classification]()
+- Module 5/6: [Supervised Learning and Classification](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-56-supervised-learning---classification)
   - Reading: [Chapter 3]()
   - [Lecture 5](): Classification
   - [Lecture 6](): Logisitic Regression
