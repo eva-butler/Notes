@@ -14,7 +14,7 @@ Table of Contents:
 - Module 5/6: [Supervised Learning and Classification](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-56-supervised-learning---classification)
   - Reading: [Chapter 3](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#reading-chapter-3)
   - [Lecture 5 Videos](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-5-videos): Classification
-  - [Lecture 6 Videos](): Logisitic Regression
+  - [Lecture 6 Videos](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-6-videos): Logisitic Regression
 - Module 7: [Unsupervised Learning]()
   - Reading: [Chapter 9]()
   - [Lecture 7](): Clustering Methods HAC and k-means
@@ -1303,9 +1303,9 @@ Area Under the Curve (AUC):
 - literaly j the area under ROC Curve
 - You can use the ROC curve to compare the difference between different classifiers.
 
-### Lecture 6 Videos 
+## Lecture 6 Videos 
 
-Video 6.1: Logistic Regression for Classificiation
+### Video 6.1: Logistic Regression for Classificiation
 <img width="311" alt="image" src="https://github.com/user-attachments/assets/a0a0f860-699e-49d7-bc45-f36de76754f8">
 <img width="311" alt="image" src="https://github.com/user-attachments/assets/4deb3d91-b0be-4e99-9c13-4a53d6782e43">
 - this is nonlinear
