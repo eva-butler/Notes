@@ -1240,3 +1240,112 @@ classification system.
         clean_digit = knn_clf.predict([X_test_mod[some_index]])
         plot_digit(clean_digit)
 
+## Lecture 5 Videos:
+
+### Video 5.1: Classification Problems:
+<img width="305" alt="image" src="https://github.com/user-attachments/assets/9cb29f1f-fe08-4c5f-8635-c93cd43a50d8">
+- Instead of a real-value response, classifciation assign c to category ot class.
+    - Regression: For pair (x, y), y is the response value of x
+    - Classification: For pair (x,y), y is the class label of x
+- INput: Measurement x1, ....., xn, is an input sapce
+- Output:  Discrete output is composed of k possible classes:
+    - y = {-1, +1} or {0,1} is called a binary classification problem
+    - y = {1, ....., K} , is called a ,multiclass classification problem
+
+Binary Classification (2-class):
+- Simplify the problem into a 5 detector.
+
+Training a binary classifier:
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/74e4a4db-510f-4165-ae63-4af3d170441c">
+- able to handle large data sets
+
+
+Performance Measures
+-  it is a lot harder to do this with classifiers. We have different options.
+
+### Video 5.2: Metrics for Classification Models
+<img width="299" alt="image" src="https://github.com/user-attachments/assets/fc945252-9f0f-4224-b009-e3508adaf3a6">
+- visual example of recall vs precision
+
+Confusion Matrix:
+- helps gain insight on the performance of your classifier:
+<img width="308" alt="image" src="https://github.com/user-attachments/assets/c6295a36-a07b-4881-98e0-77a2842e141a">
+<img width="258" alt="image" src="https://github.com/user-attachments/assets/0dde7362-88d9-4767-b185-6c7c4206bdf6">
+
+More concise metrics (than confusion matrix):
+<img width="307" alt="image" src="https://github.com/user-attachments/assets/c3d8029a-0b44-4736-9c21-2f77af8bded8">
+
+Boy who called wolf analogy?
+- Recall:
+  - Out of all the times the wolf comes, how many times did he get it right?
+  - Intuition: Did the model miss many wolves?
+- Precision:
+  - Of all the times the boy cried wolf, how many times did get it right?
+  - Intuition:Did the model cry wolf too often?
+
+Even more concise metic: F-1 Score
+- harmonic mean between precision and recall
+<img width="311" alt="image" src="https://github.com/user-attachments/assets/1443ca5d-6946-4bfa-a1ce-0a0cc96178a4">
+- most optimized when both precision and recall are the same
+
+The perfecr predicions. (we wish)
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/58933060-741e-4db0-aaa1-97c6c4f921b1">
+
+### Video 5.3: The Trade off between Precision and Recall
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/4a577010-145b-48f5-9377-a2909dfcba1a">
+<img width="299" alt="image" src="https://github.com/user-attachments/assets/0fb44b7b-392b-463d-8b07-705287a56857">
+
+
+The ROC Curve:
+- axis are a little different
+<img width="308" alt="image" src="https://github.com/user-attachments/assets/1a31ef1c-0ec4-449b-bdce-f53fed7c9fd9">
+Area Under the Curve (AUC):
+- literaly j the area under ROC Curve
+- You can use the ROC curve to compare the difference between different classifiers.
+
+Video 6.1: Logistic Regression for Classificiation
+<img width="311" alt="image" src="https://github.com/user-attachments/assets/a0a0f860-699e-49d7-bc45-f36de76754f8">
+<img width="311" alt="image" src="https://github.com/user-attachments/assets/4deb3d91-b0be-4e99-9c13-4a53d6782e43">
+- this is nonlinear
+<img width="290" alt="image" src="https://github.com/user-attachments/assets/55038b44-c2e7-4cc1-be32-f9596a905ba0">
+
+Decision Boundary: Linear Example:
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/65f6f60c-29e6-41e3-9192-eb38dc4547c4">
+
+Decision Boundary: Non Linear Example
+
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/eaa301b0-691b-40e3-8c56-c8da0b948b11">
+
+Loss/Cost/Error Function:
+- need to find a new lost function, so that we can still use gradient descent.
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/b2f76bd9-79fa-4473-b568-8168f3eee9f2">
+<img width="415" alt="image" src="https://github.com/user-attachments/assets/da0353a9-c703-44b3-a52e-ec85306ce9de">
+- when y =1
+<img width="415" alt="image" src="https://github.com/user-attachments/assets/01e48b40-680f-42a6-9e00-35327709107a">
+- when y =0
+
+Combining the two cases: The LOG LOSS FUNCTION
+<img width="623" alt="image" src="https://github.com/user-attachments/assets/64de417c-05b3-44dd-a982-4d35659d3d53">
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/7d1bde22-c14c-40f2-9321-b3f843cde411">
+- vectoried version.
+
+### Video 6.2: Gradient Descent For Logisitc Regression
+- There is no known closed form to compute the value of the parameter that minimizes the cost function (there is no "Normal Equation" for the Logistic Regression)
+- The new cost function is convex, so Gradient Descent is quarennted to find the global minimum.
+
+Gradient Descent Formulation:
+<img width="305" alt="image" src="https://github.com/user-attachments/assets/29197153-d471-46ae-b7fc-83d7964502ea">
+<img width="227" alt="image" src="https://github.com/user-attachments/assets/4069c360-2c77-476a-bdd8-eb002f0bbe74">
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/05d1a918-2d10-4a36-9d6d-693e27ab14b4">
+
+Final:
+<img width="276" alt="image" src="https://github.com/user-attachments/assets/3fa424b8-aa7c-40ee-80d4-19bf06f3867e">
+- looks really similar to linear regression
+
+Gradient Descent Step:
+<img width="312" alt="image" src="https://github.com/user-attachments/assets/f3cd9d81-44cd-4083-a07d-bb8495c1d1c5">
+- we can compute the gradient of the model at every single step.
+- for the gradient update you do this:
+<img width="205" alt="image" src="https://github.com/user-attachments/assets/c3bb96b3-54fc-49c8-bfde-dcff2dfbb3e1">
+- batch you use all of training for X and y, minibatch you use a subset for X and y, and for the last one you do one at a time. 
+
