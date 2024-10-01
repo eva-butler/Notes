@@ -923,15 +923,320 @@ Mini-Batch gradient descent
 
 # Module 5/6: Supervised Learning - Classification
 
-## Class 6: Classification Problems
-<img width="446" alt="image" src="https://github.com/user-attachments/assets/6907a651-ccff-498c-b1e5-e603704eb629">
-<img width="466" alt="image" src="https://github.com/user-attachments/assets/97a8bd31-fecc-4523-85fe-d2761f110653">
-- this is actually a really terrible classifier
-- evaluating classifiers are a bit trickier than a regressor
-- we will need to use things like the Confusion Matrix, Precision and Recall, F-1 Score, ROC curve, and Area under the ROC
+## Reading: Chapter 3
 
-**just watch the videos for this section**
+Training a Binary Classifier:
+- This “5-detector” will be an example of a binary classifier, capable of
+distinguishing between just two classes, 5 and not-5. Let’s create the target vectors for
+this classification task:
+
+        y_train_5 = (y_train == 5) # True for all 5s, False for all other digits.
+        y_test_5 = (y_test == 5)
+- A good place to start is with a StochasticGradient Descent (SGD) classifier, using Scikit-Learn’s SGDClassifier class. This clas‐sifier has the advantage of being capable of handling very large datasets efficiently.This is in part because SGD deals with training instances independently, one at a time (which also makes SGD well suited for online learning), as we will see later.
+
+        from sklearn.linear_model import SGDClassifier
+        sgd_clf = SGDClassifier(random_state=42)
+        sgd_clf.fit(X_train, y_train_5)
+        >>> sgd_clf.predict([some_digit])
+        array([ True], dtype=bool)
+
+Performance Measures:
+
+- Cross-Validation:
+  - Let’s use the cross_val_score() function to evaluate your SGDClassifier model
+using K-fold cross-validation, with three folds. Remember that K-fold crossvalidation means splitting the training set into K-folds (in this case, three), then mak‐
+ing predictions and evaluating them on each fold using a model trained on the
+remaining folds
+  - <img width="458" alt="image" src="https://github.com/user-attachments/assets/2e00efea-971f-4b7c-ae76-5640126bca50">
+  - <img width="516" alt="image" src="https://github.com/user-attachments/assets/28efea08-82ff-4c8e-9839-0c875e2d6d7c">
+
+- Confusion Matrix
+  - A much better way to evaluate the performance of a classifier is to look at the confu‐
+sion matrix. The general idea is to count the number of times instances of class A are
+classified as class B. For example, to know the number of times the classifier confused
+images of 5s with 3s, you would look in the 5th row and 3rd column of the confusion
+matrix.
+  - To compute the confusion matrix, you first need to have a set of predictions, so they
+can be compared to the actual targets. You could make predictions on the test set, but
+let’s keep it untouched for now (remember that you want to use the test set only at the
+very end of your project, once you have a classifier that you are ready to launch).
+
+        from sklearn.model_selection import cross_val_predict
+        y_train_pred = cross_val_predict(sgd_clf, X_train, y_train_5, cv=3)
+  - Just like the cross_val_score() function, cross_val_predict() performs K-fold
+cross-validation, but instead of returning the evaluation scores, it returns the predic‐
+tions made on each test fold. This means that you get a clean prediction for each
+instance in the training set (“clean” meaning that the prediction is made by a model
+that never saw the data during training)
+  - Now you are ready to get the confusion matrix using the confusion_matrix() func‐
+tion. Just pass it the target classes (y_train_5) and the predicted classes
+(y_train_pred):
+
+        >>> from sklearn.metrics import confusion_matrix
+        >>> confusion_matrix(y_train_5, y_train_pred)
+        array([[53272, 1307],
+         [ 1077, 4344]])
+
+- The Preciscion of the Classifier:
+  - <img width="170" alt="image" src="https://github.com/user-attachments/assets/bc5d0e24-dcdf-4285-ad0d-649da662ef03">
+  - TP is the number of true positives, and FP is the number of false positives.
+  - An interesting one to look at is the accuracy of the positive pre‐
+dictions
 
 
+- The Recall of a Classifier:
+  - <img width="161" alt="image" src="https://github.com/user-attachments/assets/b9442200-141f-40eb-8e3e-4eb1ba61df52">
+  - FN is of course the number of false negatives.
+  -  also called sensitivity or true positive rate (TPR): this is the ratio of positive instances that are correctly detected by the classifier
 
+ - PRECISION AND RECALL:
+<img width="511" alt="image" src="https://github.com/user-attachments/assets/f1f1333d-a98e-4cc5-afa4-bdc9a75104c2">
+
+        >>> from sklearn.metrics import precision_score, recall_score
+        >>> precision_score(y_train_5, y_train_pred) # == 4344 / (4344 + 1307)
+        0.76871350203503808
+        >>> recall_score(y_train_5, y_train_pred) # == 4344 / (4344 + 1077)
+        0.80132816823464303
+
+- The F1 Score:
+  - The combination of Precision and Recall
+  - if you need a simple way to compare two classifiers.
+  -  The F1 score isthe harmonic mean of precision and recall (Equation 3-3). Whereas the regular mean treats all values equally, the harmonic mean gives much more weight to low values. As a result, the classifier will only get a high F1 score if both recall and precision are high.
+  -  <img width="409" alt="image" src="https://github.com/user-attachments/assets/f6989e5e-42a3-485d-b150-54400fb81437">
+
+            >>> from sklearn.metrics import f1_score
+            >>> f1_score(y_train_5, y_train_pred)
+            0.78468208092485547
+- The F1 score favors classifiers that have similar precision and recall. This is not always what you want: in some contexts you mostly care about precision, and in other contexts you really care about recall
+
+- Precision/Recall Tradeoff:
+  - you can’t have it both ways: increasing precision reduces recall, and vice versa. This is called the precision/recall tradeo.
+  - Scikit-Learn does not let you set the threshold directly, but it does give you access to
+the decision scores that it uses to make predictions. Instead of calling the classifier’s
+predict() method, you can call its decision_function() method, which returns a
+score for each instance, and then make predictions based on those scores using any
+threshold you want:
+
+        >>> y_scores = sgd_clf.decision_function([some_digit])
+        >>> y_scores
+        array([ 161855.74572176])
+        >>> threshold = 0
+        >>> y_some_digit_pred = (y_scores > threshold)
+        array([ True], dtype=bool)
+  - The SGDClassifier uses a threshold equal to 0, so the previous code returns the same
+result as the predict() method (i.e., True). Let’s raise the threshold:
+
+        >>> threshold = 200000
+        >>> y_some_digit_pred = (y_scores > threshold)
+        >>> y_some_digit_pred
+        array([False], dtype=bool)
+  - This confirms that raising the threshold decreases recall. The image actually repre‐
+sents a 5, and the classifier detects it when the threshold is 0, but it misses it when the
+threshold is increased to 200,000.
+
+  - For this you will first need to get the
+scores of all instances in the training set using the cross_val_predict() function
+again, but this time specifying that you want it to return decision scores instead of
+predictions:
+
+        y_scores = cross_val_predict(sgd_clf, X_train, y_train_5, cv=3,
+         method="decision_function")
+        
+        from sklearn.metrics import precision_recall_curve
+        precisions, recalls, thresholds = precision_recall_curve(y_train_5, y_scores)
+        
+        def plot_precision_recall_vs_threshold(precisions, recalls, thresholds):
+         plt.plot(thresholds, precisions[:-1], "b--", label="Precision")
+         plt.plot(thresholds, recalls[:-1], "g-", label="Recall")
+         plt.xlabel("Threshold")
+         plt.legend(loc="center left")
+         plt.ylim([0, 1])
+        plot_precision_recall_vs_threshold(precisions, recalls, thresholds)
+        plt.show()
+ - <img width="533" alt="image" src="https://github.com/user-attachments/assets/29d2627a-955a-44bd-9ebf-c85396e3f731">
+ - Now you can simply select the threshold value that gives you the best precision/recall
+tradeoff for your task. Another way to select a good precision/recall tradeoff is to plot
+precision directly against recall,
+   - <img width="498" alt="image" src="https://github.com/user-attachments/assets/5c9c7686-846a-40ed-b0b9-8b7b8df5237d">
+   
+- The ROC Curve:
+  - The receiver operating characteristic (ROC) curve is another common tool used with
+binary classifiers. It is very similar to the precision/recall curve, but instead of plot‐
+ting precision versus recall, the ROC curve plots the true positive rate (another name
+for recall) against the false positive rate.The FPR is the ratio of negative instances that
+are incorrectly classified as positive. It is equal to one minus the true negative rate,
+which is the ratio of negative instances that are correctly classified as negative. The
+TNR is also called specificity. Hence the ROC curve plots sensitivity (recall) versus
+1 – specificity.
+  - To plot the ROC curve, you first need to compute the TPR and FPR for various thres‐
+hold values, using the roc_curve() function:
+
+        from sklearn.metrics import roc_curve
+        fpr, tpr, thresholds = roc_curve(y_train_5, y_scores)
+        def plot_roc_curve(fpr, tpr, label=None):
+         plt.plot(fpr, tpr, linewidth=2, label=label)
+         plt.plot([0, 1], [0, 1], 'k--')
+         plt.axis([0, 1, 0, 1])
+         plt.xlabel('False Positive Rate')
+         plt.ylabel('True Positive Rate')
+        plot_roc_curve(fpr, tpr)
+        plt.show()
+
+  - Once again there is a tradeoff: the higher the recall (TPR), the more false positives
+(FPR) the classifier produces. The dotted line represents the ROC curve of a purely
+random classifier; a good classifier stays as far away from that line as possible (toward
+the top-left corner).
+  -  area under the curve (AUC). A per‐
+fect classifier will have a ROC AUC equal to 1, whereas a purely random classifier will
+have a ROC AUC equal to 0.5. Scikit-Learn provides a function to compute the ROC
+AUC:
+            
+            >>> from sklearn.metrics import roc_auc_score
+            >>> roc_auc_score(y_train_5, y_scores)
+            0.96244965559671547
+
+
+Multiclass Classification:
+- Whereas binary classifiers distinguish between two classes, multiclass classifiers (also
+called multinomial classifiers) can distinguish between more than two classes.
+- For example, one way to create a system that can classify the digit images into 10
+classes (from 0 to 9) is to train 10 binary classifiers, one for each digit (a 0-detector, a
+1-detector, a 2-detector, and so on). Then when you want to classify an image, you get
+the decision score from each classifier for that image and you select the class whose
+classifier outputs the highest score. This is called the one-versus-all (OvA) strategy
+(also called one-versus-the-rest).
+- Another strategy is to train a binary classifier for every pair of digits: one to distin‐
+guish 0s and 1s, another to distinguish 0s and 2s, another for 1s and 2s, and so on.
+This is called the one-versus-one (OvO) strategy. If there are N classes, you need to
+train N × (N – 1) / 2 classifiers. For the MNIST problem, this means training 45
+binary classifiers! When you want to classify an image, you have to run the image
+through all 45 classifiers and see which class wins the most duels. The main advan‐
+tage of OvO is that each classifier only needs to be trained on the part of the training
+set for the two classes that it must distinguish.
+- Scikit-Learn detects when you try to use a binary classification algorithm for a multi‐
+class classification task, and it automatically runs OvA (except for SVM classifiers for
+which it uses OvO). Let’s try this with the SGDClassifier:
+
+            >>> sgd_clf.fit(X_train, y_train) # y_train, not y_train_5
+            >>> sgd_clf.predict([some_digit])
+            array([ 5.])
+- If you want to force ScikitLearn to use one-versus-one or one-versus-all, you can use
+the OneVsOneClassifier or OneVsRestClassifier classes. Simply create an instance
+and pass a binary classifier to its constructor.  For example, this code creates a multi‐
+class classifier using the OvO strategy, based on a SGDClassifier:
+            
+            >>> from sklearn.multiclass import OneVsOneClassifier
+            >>> ovo_clf = OneVsOneClassifier(SGDClassifier(random_state=42))
+            >>> ovo_clf.fit(X_train, y_train)
+            >>> ovo_clf.predict([some_digit])
+            array([ 5.])
+            >>> len(ovo_clf.estimators_)
+            45
+
+        >>> cross_val_score(sgd_clf, X_train, y_train, cv=3, scoring="accuracy")
+        array([ 0.84063187, 0.84899245, 0.86652998])
+It gets over 84% on all test folds. If you used a random classifier, you would get 10%
+accuracy, so this is not such a bad score, but you can still do much better. For exam‐
+ple, simply scaling the inputs (as discussed in Chapter 2) increases accuracy above
+90%:
+
+        >>> from sklearn.preprocessing import StandardScaler
+        >>> scaler = StandardScaler()
+        >>> X_train_scaled = scaler.fit_transform(X_train.astype(np.float64))
+        >>> cross_val_score(sgd_clf, X_train_scaled, y_train, cv=3, scoring="accuracy")
+array([ 0.91011798, 0.90874544, 0.906636 ])
+
+Error Analysis:
+- Here, we will assume that you have found a promising model and
+you want to find ways to improve it.
+- First, you can look at the confusion matrix. You need to make predictions using the
+cross_val_predict() function, then call the confusion_matrix() function, just like
+you did earlier:
+
+        >>> y_train_pred = cross_val_predict(sgd_clf, X_train_scaled, y_train, cv=3)
+        >>> conf_mx = confusion_matrix(y_train, y_train_pred)
+        >>> conf_mx
+        array([[5725, 3, 24, 9, 10, 49, 50, 10, 39, 4],
+         [ 2, 6493, 43, 25, 7, 40, 5, 10, 109, 8],
+         [ 51, 41, 5321, 104, 89, 26, 87, 60, 166, 13],
+         [ 47, 46, 141, 5342, 1, 231, 40, 50, 141, 92],
+         [ 19, 29, 41, 10, 5366, 9, 56, 37, 86, 189],
+         [ 73, 45, 36, 193, 64, 4582, 111, 30, 193, 94],
+         [ 29, 34, 44, 2, 42, 85, 5627, 10, 45, 0],
+         [ 25, 24, 74, 32, 54, 12, 6, 5787, 15, 236],
+         [ 52, 161, 73, 156, 10, 163, 61, 25, 5027, 123],
+         [ 43, 35, 26, 92, 178, 28, 2, 223, 82, 5240]])
+That’s a lot of numbers. It’s often more convenient to look at an image representation
+of the confusion matrix, using Matplotlib’s matshow() function:
+
+            plt.matshow(conf_mx, cmap=plt.cm.gray)
+            plt.show()
+
+Let’s focus the plot on the errors. First, you need to divide each value in the confusion
+matrix by the number of images in the corresponding class, so you can compare error
+rates instead of absolute number of errors (which would make abundant classes look
+unfairly bad):
+
+        row_sums = conf_mx.sum(axis=1, keepdims=True)
+        norm_conf_mx = conf_mx / row_sums
+Now let’s fill the diagonal with zeros to keep only the errors, and let’s plot the result:
+
+        np.fill_diagonal(norm_conf_mx, 0)
+        plt.matshow(norm_conf_mx, cmap=plt.cm.gray)
+        plt.show()
+- Analyzing the confusion matrix can often give you insights on ways to improve your
+classifier. Looking at this plot, it seems that your efforts should be spent on improving
+classification of 8s and 9s, as well as fixing the specific 3/5 confusion. For example,
+you could try to gather more training data for these digits. Or you could engineer
+new features that would help the classifier—for example, writing an algorithm to
+count the number of closed loops (e.g., 8 has two, 6 has one, 5 has none). Or you
+could preprocess the images (e.g., using Scikit-Image, Pillow, or OpenCV) to make
+some patterns stand out more, such as closed loops.
+
+Multilabel Classification:
+- Until now each instance has always been assigned to just one class. In some cases you
+may want your classifier to output multiple classes for each instance
+
+
+        from sklearn.neighbors import KNeighborsClassifier
+        y_train_large = (y_train >= 7)
+        y_train_odd = (y_train % 2 == 1)
+        y_multilabel = np.c_[y_train_large, y_train_odd]
+        knn_clf = KNeighborsClassifier()
+        knn_clf.fit(X_train, y_multilabel)
+- This code creates a y_multilabel array containing two target labels for each digit
+image: the first indicates whether or not the digit is large (7, 8, or 9) and the second
+indicates whether or not it is odd. The next lines create a KNeighborsClassifier
+instance (which supports multilabel classification, but not all classifiers do) and we
+train it using the multiple targets array. Now you can make a prediction, and notice
+that it outputs two labels:\
+
+        >>> knn_clf.predict([some_digit])
+        array([[False, True]], dtype=bool)
+
+- There are many ways to evaluate a multilabel classifier, and selecting the right metric
+really depends on your project. For example, one approach is to measure the F1 score for each individual label (or any other binary classifier metric discussed earlier), then
+simply compute the average score. This code computes the average F1 score across all labels:
+        
+        >>> y_train_knn_pred = cross_val_predict(knn_clf, X_train, y_multilabel, cv=3)
+        >>> f1_score(y_multilabel, y_train_knn_pred, average="macro")
+        0.97709078477525002
+- This assumes that all labels are equally important, which may not be the case. In par‐
+ticular, if you have many more pictures of Alice than of Bob or Charlie, you may want
+to give more weight to the classifier’s score on pictures of Alice. One simple option is
+102 | Chapter 3: Classification 4 Scikit-Learn offers a few other averaging options and multilabel classifier metrics; see the documentation for more details. to give each label a weight equal to its support (i.e., the number of instances with that target label). To do this, simply set average="weighted" in the preceding code.
+
+Multioutput Classification:
+- It is simply a generalization of multilabel classification where each label can be multiclass (i.e., it can have more than two possible values).
+- To illustrate this, let’s build a system that removes noise from images. It will take as
+input a noisy digit image, and it will (hopefully) output a clean digit image, repre‐
+sented as an array of pixel intensities, just like the MNIST images. Notice that the
+classifier’s output is multilabel (one label per pixel) and each label can have multiple
+values (pixel intensity ranges from 0 to 255). It is thus an example of a multioutput
+classification system.
+- Predicting which pixels need to be less noisy:
+
+        knn_clf.fit(X_train_mod, y_train_mod)
+        clean_digit = knn_clf.predict([X_test_mod[some_index]])
+        plot_digit(clean_digit)
 
