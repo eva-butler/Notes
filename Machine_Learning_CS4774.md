@@ -10,7 +10,7 @@ Table of Contents:
 - Module 4: [Supervised Learning - Regression](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-4-supervised-learning---regression)
     - Reading: [Chapter 4](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readings-chapter-4)
     - [Class 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#class-5-in-person)
-    - [Video Notes]()
+    - [Video Notes](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#video-notes)
 - Module 5/6: [Supervised Learning and Classification]()
   - Reading: [Chapter 3]()
   - [Lecture 5](): Classification
