@@ -606,6 +606,72 @@ Mostly just running the colab file along with proff.
 
 # Module 4: Supervised Learning - Regression 
 ### Readings: Chapter 4
+Linear Regression:
+- More generally, a linear model makes a prediction by simply computing a weighted
+sum of the input features, plus a constant called the bias term (
+- <img width="514" alt="image" src="https://github.com/user-attachments/assets/117cfeee-18bd-4cf1-97ec-0dae715d93d5">
+- <img width="506" alt="image" src="https://github.com/user-attachments/assets/b6aaad1d-ba9b-4791-9bfc-a859b9093d1b">
+- the most common performance measure
+of a regression model is the Root Mean Square Error (RMSE) (Equation 2-1). There‐
+fore, to train a Linear Regression model, you need to find the value of θ that minimi‐
+zes the RMSE
+- <img width="548" alt="image" src="https://github.com/user-attachments/assets/5fbb6ef4-318b-439c-8cfb-ab853c9a9243">
+
+The Normal Equation:
+- To find the value of θ that minimizes the cost function, there is a closed-form solution
+—in other words, a mathematical equation that gives the result directly. This is called
+the Normal Equation
+<img width="344" alt="image" src="https://github.com/user-attachments/assets/0ffb490f-f5f4-40f1-95a5-ed5cac813dc0">
+
+
+        X_b = np.c_[np.ones((100, 1)), X] # add x0 = 1 to each instance
+        theta_best = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y)
+
+- Computational Complexity:
+  - The Normal Equation computes the inverse of XT· X, which is an n × n matrix(where n is the number of features). The computational complexity of inverting such a matrix is typically about O(n2.4) to O(n3).
+
+Gradient Descent:
+- Gradient Descent is a very generic optimization algorithm capable of finding optimal
+solutions to a wide range of problems. The general idea of Gradient Descent is to
+tweak parameters iteratively in order to minimize a cost function
+- An important parameter in Gradient Descent is the size of the steps, determined by
+the learning rate hyperparameter. If the learning rate is too small, then the algorithm
+will have to go through many iterations to converge, which will take a long time
+- segment joining them never crosses the curve. This implies that there are no local
+minima, just one global minimum. It is also a continuous function with a slope that
+never changes abruptly.4
+ These two facts have a great consequence: Gradient Descent
+is guaranteed to approach arbitrarily close the global minimum (if you wait long
+enough and if the learning rate is not too high).
+
+Batch Gradient Desecent:
+- you need to compute the gradient of the cost func‐
+tion with regards to each model parameter θj. In other words, you need to calculatehow much the cost function will change if you change θj just a little bit. This is called a partial derivative.
+- <img width="506" alt="image" src="https://github.com/user-attachments/assets/24cb0820-7eee-49ee-a483-a67705316120">
+- <img width="489" alt="image" src="https://github.com/user-attachments/assets/885c6234-710f-4442-8157-dd86ee840ee7">
+- <img width="437" alt="image" src="https://github.com/user-attachments/assets/17677661-4e15-4be1-b17d-f471ae0fccb6">
+
+Stochastic Gradient Descent:
+- Stochastic Gradient Descent has a better
+chance of finding the global minimum than Batch Gradient Descent does.
+- At the opposite extreme, Stochastic Gradient Descent just
+picks a random instance in the training set at every step and computes the gradients
+based only on that single instance.
+- <img width="547" alt="image" src="https://github.com/user-attachments/assets/978a9ffd-3a47-43f2-b64e-b29b3528267e">
+
+Mini-batch Gradient Descent:
+- It is quite simple to understand once you know Batch and Stochastic Gradi‐
+ent Descent: at each step, instead of computing the gradients based on the full train‐
+ing set (as in Batch GD) or based on just one instance (as in Stochastic GD), MiniGradient Descent | 1218 While the Normal Equation can only perform Linear Regression, the Gradient Descent algorithms can beused to train many other models, as we will see.
+batch GD computes the gradients on small random sets of instances called minibatches. The main advantage of Mini-batch GD over Stochastic GD is that you can
+get a performance boost from hardware optimization of matrix operations, especially
+when using GPUs.
+
+
+Polynomial Regression:
+
+
+
 
 
 ## Class 5 (in person)
