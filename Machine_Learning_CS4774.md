@@ -18,7 +18,7 @@ Table of Contents:
 - Module 7: [Unsupervised Learning](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-7-unsupervised-learning)
   - Reading: [Chapter 9]()
   - [Lecture 7](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-7-videos-clustering-methods-hac-and-k-means): Clustering Methods HAC and k-means
-- Module 8: [Decision Tree Learning]()
+- Module 8: [Decision Tree Learning](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-8-decision-tree-learning)
   - Reading: [Chapter 6]()
   - [Lecture 8](): Decision Trees
 - Module 10: [Analogical Learning]()
