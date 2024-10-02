@@ -1436,9 +1436,84 @@ Partition Clustering (K-means)
 - <img width="443" alt="image" src="https://github.com/user-attachments/assets/a58e2450-3d7c-4b10-ad89-380fc6820db9">
 - <img width="437" alt="image" src="https://github.com/user-attachments/assets/720c9378-ea3f-49ed-9904-4b5018724692">
     - need to know this
-- 
 
 
+# Module 8: Decision Tree Learning
+
+## Reading Chapter 6:
+
+## Lecture 8 Videos:
+
+### Video 8.1: Decision Trees
+- using a tree structure to split data into groups
+- <img width="603" alt="image" src="https://github.com/user-attachments/assets/37b3bf59-819f-4329-aca8-062942cfcd02">
+- the number one thing is determining what feature to split on and what is the threshold.
+- <img width="571" alt="image" src="https://github.com/user-attachments/assets/49a84039-bf88-4b0d-bc17-6fc04643d90a">
+  - Gini Index:
+      - <img width="348" alt="image" src="https://github.com/user-attachments/assets/1d800ded-5b61-4844-aaeb-84133fb8ff3b">
+      - <img width="500" alt="image" src="https://github.com/user-attachments/assets/86811725-643a-436b-964e-03b97538ea1a">
+          - this is the gini index for that top node
+          - orange is 0, o.168, 0.0425
+          - lower gini index, it means your nodes are more pure. 
+          - as u move down the branches, the gini index decreases as you move down. You want your leaf nodes to be pure. 
+  - Decision Boundary:
+      - <img width="673" alt="image" src="https://github.com/user-attachments/assets/2c51a3de-a39e-46d2-ad51-0c43564f09d1">
+      - <img width="574" alt="image" src="https://github.com/user-attachments/assets/d271235b-f04b-4873-8014-c29b73567967">
+      
+
+
+
+
+
+### Video 8.2: Entropy and Information Gain
+Entropy- 
+- a measure of disorderness. it is zero when well-order and identical
+- A set's entopy is zero when it contains instances of only one class.
+- Entrop is H st.
+- <img width="610" alt="image" src="https://github.com/user-attachments/assets/8e5bfcf1-a64b-4956-9592-0736ece61d06">
+- gini tends to isolate that largest class
+- <img width="593" alt="image" src="https://github.com/user-attachments/assets/080467cc-ee24-48bf-ac29-9844e83f416d">
+v<img width="585" alt="image" src="https://github.com/user-attachments/assets/eb34ce47-4198-4d15-8cc0-31e08ca45ab6">
+
+Information Gain:
+- <img width="545" alt="image" src="https://github.com/user-attachments/assets/02456bad-a7c6-4061-b573-92455f100839">
+
+- trees need to be somewhat small
+
+<img width="593" alt="image" src="https://github.com/user-attachments/assets/3add5aac-0595-4ae3-b986-b53417591f9b">
+
+
+Measure teh resucrtion in entropy of Y from knowing Xm we use information Gain:
+
+
+
+
+Entropy Interpretation.
+
+
+### Video 8.3: Limitations and Applications of Decision Trees
+<img width="607" alt="image" src="https://github.com/user-attachments/assets/16475675-4bc5-4282-ab9c-0c9a3a306806">
+
+
+# Module 10: Analogical Learning
+
+## Reading Chapter 5:
+
+## Lecture 10a Videos:
+
+### Video 10.1
+
+### Video 10.2
+
+### Video 10.3 
+
+## Lecture 10b Videos:
+
+### Video 10.4
+
+### Video 10.5
+
+### Video 10.6
 
 
 
