@@ -1426,6 +1426,20 @@ Hierarchical Clustering:
 
 Partition Clustering (K-means)
 - construct a partition of m objects into a set of k clusters.
+- user has to specify the desired number of clusters
+- partitioning alg:
+  - <img width="418" alt="image" src="https://github.com/user-attachments/assets/854abacc-d8f6-488c-ace1-225ea0cb3ba4">
+  - <img width="434" alt="image" src="https://github.com/user-attachments/assets/3fe7cf68-c682-4d28-a48a-7ca6af7702cc">
+- <img width="445" alt="image" src="https://github.com/user-attachments/assets/bfbe50f2-54c0-455e-b0e2-f6b18fe5c5f4">
+- <img width="436" alt="image" src="https://github.com/user-attachments/assets/5d21bd95-5c22-4e6f-be06-cc7426ed75f9">
+- <img width="431" alt="image" src="https://github.com/user-attachments/assets/a67d0c0c-cd04-4b38-bccf-e6b55d899ddb">
+- <img width="443" alt="image" src="https://github.com/user-attachments/assets/a58e2450-3d7c-4b10-ad89-380fc6820db9">
+- <img width="437" alt="image" src="https://github.com/user-attachments/assets/720c9378-ea3f-49ed-9904-4b5018724692">
+    - need to know this
+- 
+
+
+
 
 
 
