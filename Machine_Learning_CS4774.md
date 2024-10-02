@@ -1501,21 +1501,99 @@ Entropy Interpretation.
 
 ## Lecture 10a Videos:
 
-### Video 10.1
+### Video 10.1: SVM as a Large Margin Classifier
+Large Margin Classifier
+- small margin does not generalize well
+- more robust classification with a larger margin
+<img width="608" alt="image" src="https://github.com/user-attachments/assets/d61badc2-b9cf-42a9-a7a9-a63bc6a817e3">
 
-### Video 10.2
+Introducing Support Vector Machine
+<img width="381" alt="image" src="https://github.com/user-attachments/assets/de229e48-5895-4623-93aa-d3ebfc2ca012">
+Linear SVM:
+- classifier seperates two classes but also stays as far away from the closest training samples as possible -> maximized the margin.
+<img width="623" alt="image" src="https://github.com/user-attachments/assets/106ae3f2-3bc4-4745-8be5-155a3a859182">
+- decision boundary is fully determined by the samples located on the edge of the strret -> support vectors.
 
-### Video 10.3 
+SVM Model:
+<img width="598" alt="image" src="https://github.com/user-attachments/assets/6dbd52fd-70cd-4934-980b-5e5de7448241">
+<img width="614" alt="image" src="https://github.com/user-attachments/assets/817ce913-1b5f-4893-9548-fb14b9f06ea5">
+<img width="336" alt="image" src="https://github.com/user-attachments/assets/ffab9d40-f4bc-484d-a84b-d1e2e742f650">
+- features need to be scaled
+- 
 
-## Lecture 10b Videos:
+### Video 10.2: SVM Objective Function
+- how to find w and b? What is the line
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/302dd851-2aae-4a3f-8f97-b7f6213174ad">
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/932618b6-193c-4ffc-9aef-f78d3267cc66">
+<img width="304" alt="image" src="https://github.com/user-attachments/assets/3b169553-31d7-4b26-9ece-ba355c1a8102">
+<img width="315" alt="image" src="https://github.com/user-attachments/assets/c6de92e6-b72d-4ea2-8d91-7467e9797bf1">
+<img width="314" alt="image" src="https://github.com/user-attachments/assets/bd5a74f6-049f-4a88-a07f-e43a42ed234c">
+- So if you want to maximize M, just minimize w
+<img width="307" alt="image" src="https://github.com/user-attachments/assets/a170e8e0-1f69-4f79-a38a-24a377c2ff43">
+<img width="307" alt="image" src="https://github.com/user-attachments/assets/a2f8d8a3-42c0-47a0-b3c5-58b6cb14c7af">
 
-### Video 10.4
-
-### Video 10.5
-
-### Video 10.6
 
 
+### Video 10.3 : SVM Soft Margin Classification
+Hard Margin Classifciation:
+- so far we havent allowed examples to be on the other side of the margin.
+<img width="317" alt="image" src="https://github.com/user-attachments/assets/56568e81-3328-4dc5-b529-d48ca7117fd7">
+- this is only possible if you have data that is linearly seperable.
+- we need to come up with a more flexible model that can deal with those examples on the other side of the boundary
+<img width="316" alt="image" src="https://github.com/user-attachments/assets/0af6c232-f7cc-4f8a-b5dd-079f7c9a3c94">
+- larger value of C, smaller margin, less violation
+- this is a trade of between violations and margin size
+<img width="317" alt="image" src="https://github.com/user-attachments/assets/92e516a5-2774-4dca-bcc5-654f1982e519">
+<img width="325" alt="image" src="https://github.com/user-attachments/assets/4eec5410-1593-4c8b-b946-59562efd5b20">
+<img width="296" alt="image" src="https://github.com/user-attachments/assets/5c652407-d32e-47ba-811e-f80a274873a8">
+<img width="320" alt="image" src="https://github.com/user-attachments/assets/6616a909-1ab2-4690-8aee-73cc1d3cd7f8">
+Finding the right C?
+<img width="317" alt="image" src="https://github.com/user-attachments/assets/d511ce3d-13cf-408a-a086-34fed8a09b61">
+
+
+
+## Lecture 10b Videos: Non-Linear SVM
+
+### Video 10.4: SVM Dual Problem
+- The Dual Problem
+Introducing Lagrange Multiplies:
+<img width="311" alt="image" src="https://github.com/user-attachments/assets/57569762-bc24-4eb0-b4ec-4daba25c589f">
+<img width="422" alt="image" src="https://github.com/user-attachments/assets/985bf350-2bba-4bda-8049-040e020bf9ac">
+
+KKT Multipliers
+<img width="416" alt="image" src="https://github.com/user-attachments/assets/76343fb8-e736-4253-87b3-a562f054f020">
+<img width="422" alt="image" src="https://github.com/user-attachments/assets/68baed5d-bad0-451d-85a7-9177ab46b279">
+Setting up the Dual Problem
+<img width="319" alt="image" src="https://github.com/user-attachments/assets/413ec41b-f7ca-4d38-93c7-ee8be9ee3b1b">
+<img width="343" alt="image" src="https://github.com/user-attachments/assets/64fbfef8-1820-4411-b4de-d66feb3ced43">
+
+### Video 10.5: Non-linear SVM
+<img width="340" alt="image" src="https://github.com/user-attachments/assets/7c93b9de-87dc-4a96-9552-8a19c951a948">
+<img width="337" alt="image" src="https://github.com/user-attachments/assets/23288ef1-6c81-451e-b637-c22c55d8a85e">
+<img width="329" alt="image" src="https://github.com/user-attachments/assets/2776f2db-0e64-426d-a5ac-33411b90c4d2">
+<img width="335" alt="image" src="https://github.com/user-attachments/assets/791cd6b9-6878-4d29-83a3-746c3cee65b4">
+
+<img width="334" alt="image" src="https://github.com/user-attachments/assets/5863bc2c-e379-409e-a3e3-950487e29f7a">
+
+
+### Video 10.6: SVM Kernal Trick
+The Kernal Trick. IDK there is no way this is gonna be on the exam
+
+<img width="319" alt="image" src="https://github.com/user-attachments/assets/c6455129-8288-4781-a87b-3647dbf1672c">
+
+<img width="319" alt="image" src="https://github.com/user-attachments/assets/684eb369-d239-41a1-8ea6-0f218ab6af04">
+
+<img width="305" alt="image" src="https://github.com/user-attachments/assets/441e8a56-bb77-4ad9-b37b-afb0666250b4">
+
+<img width="340" alt="image" src="https://github.com/user-attachments/assets/a48cee9a-9cfd-4859-abeb-47cfeb80258e">
+
+<img width="326" alt="image" src="https://github.com/user-attachments/assets/de261f18-7da4-4349-80b6-cb0053403388">
+
+
+<img width="298" alt="image" src="https://github.com/user-attachments/assets/f3bbb4b0-cc14-4319-b229-10c75281d0c1">
+
+
+<img width="334" alt="image" src="https://github.com/user-attachments/assets/2a38c897-7fc1-4e8d-8e5b-21ef07e4604c">
 
 
 
