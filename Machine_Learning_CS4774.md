@@ -24,7 +24,7 @@ Table of Contents:
 - Module 10: [Analogical Learning](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-10-analogical-learning)
   - Reading: [Chapter 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#reading-chapter-5)
   - [Lecture 10a](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-10a-videos)
-  - [Lecture 10b]()
+  - [Lecture 10b](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-10b-videos-non-linear-svm)
  
 
 # Module 1: Introduction to ML
