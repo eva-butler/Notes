@@ -25,6 +25,9 @@ Table of Contents:
   - Reading: [Chapter 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#reading-chapter-5)
   - [Lecture 10a](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-10a-videos)
   - [Lecture 10b](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-10b-videos-non-linear-svm)
+- Module 11: [Ensemble Learning]()
+  - Reading: [Chapter 7]()
+  - [Lecture 11]()
  
 
 # Module 1: Introduction to ML
@@ -1596,6 +1599,67 @@ The Kernal Trick. IDK there is no way this is gonna be on the exam
 
 
 
+# Module 11: Ensemble Learning
+
+## Reading Chapter 7:
+
+## Lecture 11 Videos:
+
+### Video 11.1: Ensemble Learning
+- Ensemble is a combination of different models and then combining them together. Working on designing multiple models and them combining them together.
+- The wisdome of the crowd. Would consdier a collective ansdwer from 1000 people vs. 1 expert. Which one would you prefer?
+- Aggregate the predicion of a group of predictors (classifers or regressors) -> can be better prediction than the best individual predictor -> Ensemble Learning!
+- popular methods:
+  - bagging
+  - random forest
+  - boosting
+  - stacking
+- REVIEW (Bias and Variance):
+  - Models Error: Bias + Varience + Irreducible Error
+  - Bias: the error that is intro by approx a real-life problem, which may be exteremly complcated, by a much simpler model
+  - Varience: the amount by which model's prediciton would change ig its trained using a different training data set.
+  - <img width="190" alt="image" src="https://github.com/user-attachments/assets/30e6f57f-fc61-4d68-8f3d-0364f6a2dd52">
+- Averaging Reduces Varience:
+  - <img width="404" alt="image" src="https://github.com/user-attachments/assets/a6625a72-6fa3-44a7-abc1-afcff838196b">
+- Voting Classifiers:
+  - <img width="417" alt="image" src="https://github.com/user-attachments/assets/51f28603-2aa6-426f-9553-6566a9f44fa5">
+  - Hard Voting Classifier:
+    - take majority
+    - <img width="392" alt="image" src="https://github.com/user-attachments/assets/8aec24c2-4315-492f-9a9a-5338bc6e7517">
+  - Soft Voting Classifiers:
+    - They produce a probability of a class being a certiain label:
+
+### Video 11.2: Bootstrap Aggregating
+- Bootstrap Estimation: another way to do this is use one algorithm, but train on different random subsets.
+- THe idea:
+  - repeatedly draw m bootstrp samples from the origional training set X
+  - For each set of samples, train a model and the predict the labels.
+  - combine the results of all boostrap sets using majoirty voting
+- Bagging cs. Pasting:
+  - <img width="397" alt="image" src="https://github.com/user-attachments/assets/e52d2a2a-6b0a-4efd-aff2-e399bdc00ea8">
+  - Training in Parallel with Bagging SCALE UP.
+    - You can do this alllll at the same time since you aren't using the same training samples twice.
+- Out-of-Bag evaluation:
+  - because teh training examples are sampled randomly, some examples may not be sampled at all -> out of bag examples.
+  - if they arent used, then you can add them to a seperate test set!
+- Random Patches and Random Subspaces:
+  - we can sample the features (max_features)
+  - You can randomly select a random subset of features to train the model. And then see which performs best.
+  - random patches: radom do samples and features
+  - random subspaces: keeping all training samples while sampling the features.
+  - sampling features results in more predictor diversity, and thus trades higher bias for lower varience.
+
+### Video 11.3: Random Forest
+- an ensemble of decision trees, generally trained using bagging
+- introduce some randomness when growing trees: instead of searching for the best feature with splitting node, it searches for the best feature amoung a random set of features (subspaces) -> greater tree diversity
+- It also trades a higher bias for lower vairance.
+- Extra-Trees:
+  - when growing a tree in a RF, only a random set of features is considered for splitting at each node.
+  - Make tree more random by selecting a random threshold for each feature rather than searching for the best threshold like regular deciison tree.
+  - Extremely Randomized Trees (Extra-trees): fater to train, and trades even higher bias for a lower var.
+- Feature Importance:
+  - IN DTs, the importance of features are likely to appear closer to the root.
+  - it is possible to estimate the importance of the features by computing the average depth at whcih they appear across all trees in the forest. you can look at feature depth (feature_importances_)
 
 
 
