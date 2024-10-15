@@ -25,7 +25,6 @@ Table of Contents:
   - Reading: [Chapter 5]()
   - [Lecture 10a]()
   - [Lecture 10b]()
-- [MIDTERM REVIEW]()
  
 
 # Module 1: Introduction to ML
