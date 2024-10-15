@@ -23,7 +23,7 @@ Table of Contents:
   - [Lecture 8](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-8-videos): Decision Trees
 - Module 10: [Analogical Learning](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-10-analogical-learning)
   - Reading: [Chapter 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#reading-chapter-5)
-  - [Lecture 10a]()
+  - [Lecture 10a](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-10a-videos)
   - [Lecture 10b]()
  
 
