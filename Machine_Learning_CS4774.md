@@ -1677,7 +1677,33 @@ The Kernal Trick. IDK there is no way this is gonna be on the exam
 ## Lecture 12 Videos:
 
 ### Video 12.1: Artificial Nueral Networks - Motivation and History
-
+![image](https://github.com/user-attachments/assets/ae9fd548-e68e-43a0-83bc-7403cbeb55d5)
+- Representations MATTER:
+  - how you represent the data (features) really matters. Its hard to do this from raw data. Often these features have been given to us, but in reality we often need to determine these on our own that take a lot of skill and understanding of the data.
+  - the process of this is called representation learning
+- The Rise of Deep Learning
+  - as approach to AI, that computes abstract representation in terms of simpler representation, potentially at a multiple nested levels in a hierarchy.
+  - If we draw a computational graph of how to build on top of eachother, then it will result in lots and lots of layers that would end up being deep. THis is where deep comes from.
+- The neural perspective of deep learning: deep learning is also known as artificial neural network as it its early models are engineering systems inspired by the brain. they are not generally designed to be realistic models of biological function. the modern term deep learning is not necessarilty neurally inspired, but appeals mrore to the principle of learning at multiple levels of representation. Deep Learning has drawn heavilty on our knowledge not only of human brain architexture, but also in statsticis and applied math
+- History:
+  - three waves of development:
+    - cybernetics
+      - 1943: inspired by brain architecture
+      - perceptron: could definre the weight of different inputs
+      - adaptive linear element: predict numeric value from data
+      - backlash: against biologically inspired learning bc they argued that the learning model couldn't learn something that wasn't linear
+    - connectionism
+      - backpropagation: revived the interest of research
+      - modeling sequences:
+      - convolutional neural net: perform welll on MNIST
+      - Second AI winter: many researchers believed that they are very difficult to train, so they made different methods like SVM, kernals
+    - deep learning
+      - deep belief network: trained efficiently by greedy layer-wise pretraining
+      - AlexNet: first deep learning algorithm
+      - GAN:
+      - Deep Reinforcement Learning:AlphaGP
+      - Present: popularity and usefullness
+      
 ### Video 12.2: Components of Neural Networks
 
 ### Video 12.3: Training Artificial Neural Networks
