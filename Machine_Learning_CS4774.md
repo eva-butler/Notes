@@ -1669,6 +1669,41 @@ The Kernal Trick. IDK there is no way this is gonna be on the exam
   - IN DTs, the importance of features are likely to appear closer to the root.
   - it is possible to estimate the importance of the features by computing the average depth at whcih they appear across all trees in the forest. you can look at feature depth (feature_importances_)
 
+# Module 12: Neural Networks
+
+### Readings:(Chapter 10): 
+
+## Lecture 12 Videos:
+
+### Video 12.1: Artificial Nueral Networks - Motivation and History
+
+### Video 12.2: Components of Neural Networks
+
+### Video 12.3: Training Artificial Neural Networks
+
+# Module 13: Deep Learning
+
+### Readings:(Chapter 11): 
+
+## Lecture 13 Videos:
+
+### Video 13.1: Initialization, Activaiton, and Normalization
+
+### Video 13.2: Optimizers, Adaptive Learning Rates, and Second-order Methods
+
+# Module 14: Applications on Computer Vision
+
+### Readings:(Chapter 14): 
+
+## Lecture 14a Videos:
+
+### Video 14.1: Convolutional Neural Networks
+
+## Lecture 14b Videos:
+
+### Video 14.2: Successful CNN Architectures
+
+
 
 
 
