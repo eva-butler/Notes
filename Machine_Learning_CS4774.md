@@ -31,7 +31,7 @@ Table of Contents:
 - Module 12: [Neural Networks](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-12-neural-networks)
   - Reading: [Chapter 10](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readingschapter-10)
   - [Lecture 12](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-12-videos)
-- Module 13: [Deep Learning]()
+- Module 13: [Deep Learning](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-13-deep-learning)
   - Reading: [Chapter 11]()
   - [Lecture 13]()
 - Module 14: [Applications on Computer Vision]()
