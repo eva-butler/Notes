@@ -37,7 +37,7 @@ Table of Contents:
 - Module 14: [Applications on Computer Vision](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-14-applications-on-computer-vision)
   - Reading: [Chapter 14](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readingschapter-14)
   - [Lecture 14a](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-14a-videos)
-  - [Lecture 14b]()
+  - [Lecture 14b](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-14b-videos)
 
 # Module 1: Introduction to ML
 
