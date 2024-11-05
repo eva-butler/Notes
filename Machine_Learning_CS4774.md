@@ -28,7 +28,15 @@ Table of Contents:
 - Module 11: [Ensemble Learning](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-11-ensemble-learning)
   - Reading: [Chapter 7]()
   - [Lecture 11](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-11-videos)
- 
+- Module 12: [Neural Networks]()
+  - Reading: [Chapter 10]()
+  - [Lecture 12]()
+- Module 13: [Deep Learning]()
+  - Reading: [Chapter 11]()
+  - [Lecture 13]()
+- Module 14: [Applications on Computer Vision]()
+  - [Lecture 14a]()
+  - [Lecture 14b]()
 
 # Module 1: Introduction to ML
 
