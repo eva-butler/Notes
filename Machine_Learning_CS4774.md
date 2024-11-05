@@ -29,7 +29,7 @@ Table of Contents:
   - Reading: [Chapter 7]()
   - [Lecture 11](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-11-videos)
 - Module 12: [Neural Networks](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-12-neural-networks)
-  - Reading: [Chapter 10]()
+  - Reading: [Chapter 10](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#readingschapter-10)
   - [Lecture 12](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-12-videos)
 - Module 13: [Deep Learning]()
   - Reading: [Chapter 11]()
