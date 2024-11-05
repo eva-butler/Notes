@@ -25,7 +25,7 @@ Table of Contents:
   - Reading: [Chapter 5](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#reading-chapter-5)
   - [Lecture 10a](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-10a-videos)
   - [Lecture 10b](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#lecture-10b-videos-non-linear-svm)
-- Module 11: [Ensemble Learning]()
+- Module 11: [Ensemble Learning](https://github.com/eva-butler/Notes/blob/main/Machine_Learning_CS4774.md#module-11-ensemble-learning)
   - Reading: [Chapter 7]()
   - [Lecture 11]()
  
