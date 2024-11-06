@@ -1705,6 +1705,33 @@ The Kernal Trick. IDK there is no way this is gonna be on the exam
       - Present: popularity and usefullness
       
 ### Video 12.2: Components of Neural Networks
+- Logical COmputations with Neurons
+-<img width="288" alt="image" src="https://github.com/user-attachments/assets/8aaac2a8-e178-4887-8a22-8310021af31a">
+- <img width="277" alt="image" src="https://github.com/user-attachments/assets/12cb9d31-e45a-4080-b8be-3164c424fbd9">
+- <img width="556" alt="image" src="https://github.com/user-attachments/assets/d5aed1e7-16ad-4a8e-aaa5-2cff825595dd">
+    - input: x
+    - weight: associated with inputs
+    - weightedsum: 
+    - activation threshold: step funciton
+    - output: 
+The Perceptron:
+- the simplest form of the neural network
+- bias neron: add some bias into teh neuron
+- the xor classification problem:
+<img width="564" alt="image" src="https://github.com/user-attachments/assets/48479a3e-1102-49bf-a802-e41ef9997068">
+- multilayer perceptron: 
+- <img width="570" alt="image" src="https://github.com/user-attachments/assets/3ec67831-5363-4fce-9de8-bc3e1a56c5ed">
+- more than 2 hidden layers is a deep neural network
+- representation of a MLP:
+  -<img width="573" alt="image" src="https://github.com/user-attachments/assets/ab04572b-23e8-4d35-9632-d6ec3e5355bc">
+  - z: response value for weighted sum
+  - x: input
+  - a: activation part apply the funciton sigma to get the activated value a
+  - y: predicted output
+<img width="571" alt="image" src="https://github.com/user-attachments/assets/13d63056-77da-4096-9950-bac2fd16afc9">
+
+
+
 
 ### Video 12.3: Training Artificial Neural Networks
 
