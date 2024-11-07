@@ -1730,10 +1730,68 @@ The Perceptron:
   - y: predicted output
 <img width="571" alt="image" src="https://github.com/user-attachments/assets/13d63056-77da-4096-9950-bac2fd16afc9">
 
+Expanding to multiple examples:
+- <img width="494" alt="image" src="https://github.com/user-attachments/assets/a3d30a34-83b5-42f1-b038-123e059829c2">
+- <img width="497" alt="image" src="https://github.com/user-attachments/assets/b21d3ed1-7a36-479c-8b1d-46edc8f76b44">
 
+Activation Functions:
+- <img width="495" alt="image" src="https://github.com/user-attachments/assets/ebf22a7e-7bc3-4484-b9f5-e314eb3368a0">
+- without activation functions, each layer would consiste of linear operations, so the layer can only learn linear transformations of the input data
+- Adding a deep stack of linear layers would still implement a linear operation we need non-linearity to gain access to a much richer represetnation of the input data
+- an activation function computees a non linear transformation
+- most neural networks describe the features using an linear transformation controlled by the learned params, followed by a fixed (non linear) activation function.
+- <img width="491" alt="image" src="https://github.com/user-attachments/assets/65411355-d6d5-467e-a9a5-356914413c13">
+- <img width="491" alt="image" src="https://github.com/user-attachments/assets/d17b56b7-858d-4c8d-8360-7c4fff9f8a59">
+- the step function will not work wiht gradient based learning
+- ReLU is faster to compute and easy to optimized as its behavior is closer to linear
+- sigmoid and tanH fucntion saturate at 1
+- training with tanh is easier thatn sigmoid as its similar to the identity functions near 0
+- for classification tasks, Softmax funciton is a good choice
+- for regression tasks, no need for activation function
 
+SUMMARY:
+- <img width="495" alt="image" src="https://github.com/user-attachments/assets/94f70535-0f1f-4831-816b-b57aa4480c79">
 
 ### Video 12.3: Training Artificial Neural Networks
+- <img width="545" alt="image" src="https://github.com/user-attachments/assets/f6674fc6-9ddf-4fb5-8b77-4a47edd2035e">
+- <img width="548" alt="image" src="https://github.com/user-attachments/assets/38f93deb-d60b-45cb-8319-e54fa51e7772">
+- <img width="545" alt="image" src="https://github.com/user-attachments/assets/7161af44-04ce-45fe-b1df-5807b0579bbb">
+
+Backpropagation:
+- training a neural network
+- proposed in article by Rumelhart. consists of three steps:
+  1) Forward Pass): Feed a training example instance to the network, compute the output signal of every neuro, and measure teh network error via a loss function
+  2) Backward Pass: From the network error at the output layer, measure the error constributions coming from each neuron in previous layers
+  3) Gradient Descent: Run gradient descent on all connection weights using the measured error from step 2
+
+Computation GRaphs:
+- a computational graph language will help describe back-propogation
+- an operation og a graph is a simple function of one or more variables
+- Functions more complicated than the operations may be described by composing many operations together
+
+Symbol to Symbol Derivatives
+- <img width="549" alt="image" src="https://github.com/user-attachments/assets/aae801fc-231b-4faf-9ba9-07b73f9714d8">
+<img width="254" alt="image" src="https://github.com/user-attachments/assets/1c96f9d9-9cca-40aa-9ff2-9bef89984259">
+
+Example of Training a Neural Network:
+<img width="543" alt="image" src="https://github.com/user-attachments/assets/de8f3fb4-4323-4c7d-91be-aa02e3bb6f51">
+
+Forward Pass: Computing Loss Funciton
+<img width="528" alt="image" src="https://github.com/user-attachments/assets/c63c100d-04e4-4f78-9d9e-adfc3a08b841">
+
+Backward Pass: 
+- Taking Partial Derivatives
+<img width="490" alt="image" src="https://github.com/user-attachments/assets/720f1614-97bc-43d3-86af-4cdf7dc13d9b">
+- Applying Chain Rule:
+<img width="524" alt="image" src="https://github.com/user-attachments/assets/203e0a75-be88-4e86-be52-94ac3c657d51">
+
+- Gettign Gradient of Params:
+<img width="547" alt="image" src="https://github.com/user-attachments/assets/dfe43c25-874f-4081-b1e9-e02bf7373133">
+<img width="511" alt="image" src="https://github.com/user-attachments/assets/ea98003f-35ae-4d5c-a567-5c6d25778e80">
+
+Backprop Algorithm:
+<img width="478" alt="image" src="https://github.com/user-attachments/assets/120a93b4-b686-4250-9e3e-0d6c0338a283">
+
 
 # Module 13: Deep Learning
 
@@ -1742,8 +1800,51 @@ The Perceptron:
 ## Lecture 13 Videos:
 
 ### Video 13.1: Initialization, Activaiton, and Normalization
+- OPtimization in ML: finding the param theta of a model that significantly reduce a cost funtion J of theta, which typically includes a performance measure evaluated on the entire training set as weell as additional regularization terms
+- The simplest way to convert a ML problem back into an optimization probelm is to minimize the expected loss on the training set - > empirical risk minimization:
+<img width="321" alt="image" src="https://github.com/user-attachments/assets/ee92f051-846b-4864-b113-395fb9ad591f">
+- rather than optimizing the risk direxty, we optimize teh empirical risk and hope that the risk decreases a lot too
+
+Optimization for Neural Networks:
+- the empirical risk minimizaition is prone to overfitting as model with high capactiy such as a nueral net can simply memorize the traingin  set
+- in deep learning, we use a slightly different approach - > mini-batch stochastic methods
+  - it is important for these groups to be selected randomly -> stochasticc
+- compute the gradient loss w.r.t the params for that minibatch, then updating the params in the direction of the gradient
+<img width="285" alt="image" src="https://github.com/user-attachments/assets/45ecb77b-666e-45d5-b7d1-187f8cff09fd">
+
+<img width="529" alt="image" src="https://github.com/user-attachments/assets/59b98840-d27d-484b-8359-5d7688c754bf">
+
+<img width="548" alt="image" src="https://github.com/user-attachments/assets/c9cffc1f-5187-44a1-90aa-91f581c66c4f">
+
+<img width="545" alt="image" src="https://github.com/user-attachments/assets/5769c130-7f64-48d8-a4ec-c22e8c42057a">
+
+Optimization of the Neural Nets:
+<img width="524" alt="image" src="https://github.com/user-attachments/assets/fa57f759-bf48-4145-88f2-88c79f0b67ce">
+
+1) Initialization
+   - <img width="528" alt="image" src="https://github.com/user-attachments/assets/eb0b5e72-9424-48de-9815-011ebeeb43c4">
+   - <img width="512" alt="image" src="https://github.com/user-attachments/assets/de007097-45ae-4b27-a0d7-45f15d5d1429">
+   - <img width="497" alt="image" src="https://github.com/user-attachments/assets/e93d5d0d-6243-427c-bb46-926f944a68a9">
+2) Activation
+   - <img width="530" alt="image" src="https://github.com/user-attachments/assets/06ff1ce4-16ab-4b40-8a2b-ee13c47ccb1a">
+   - <img width="539" alt="image" src="https://github.com/user-attachments/assets/8b132e24-f6d2-45b9-8c69-533fce4356b6">
+   - <img width="541" alt="image" src="https://github.com/user-attachments/assets/d77ecb0a-f0b2-468a-8e26-97fe2e4c8c5d">
+3) Normalization
+   -  <img width="536" alt="image" src="https://github.com/user-attachments/assets/0bb94281-14f9-40c0-988c-0a11bd2a34b7">
+   - <img width="537" alt="image" src="https://github.com/user-attachments/assets/dcbd4eb8-f658-40f9-a938-c03219334184">
+   - <img width="530" alt="image" src="https://github.com/user-attachments/assets/e5b5520b-0177-4bc2-9daa-65857536777c">
+   - <img width="550" alt="image" src="https://github.com/user-attachments/assets/4df01589-8690-436d-b053-85a1278010ad">
+
 
 ### Video 13.2: Optimizers, Adaptive Learning Rates, and Second-order Methods
+
+
+
+
+
+
+
+
 
 # Module 14: Applications on Computer Vision
 
