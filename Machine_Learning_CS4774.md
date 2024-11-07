@@ -1838,6 +1838,35 @@ Optimization of the Neural Nets:
 
 ### Video 13.2: Optimizers, Adaptive Learning Rates, and Second-order Methods
 
+4) Basic Optimizers
+   - <img width="401" alt="image" src="https://github.com/user-attachments/assets/68d75208-66c6-455c-8f1d-a76b3f73fd23">
+   - <img width="506" alt="image" src="https://github.com/user-attachments/assets/bc84cea2-c0f5-4a31-980f-3857f4987451">
+   - <img width="534" alt="image" src="https://github.com/user-attachments/assets/c8462c76-b738-4b0f-a3ce-fe42bb2bdecd">
+   - <img width="515" alt="image" src="https://github.com/user-attachments/assets/5d37e3c0-05b3-4398-9fb0-1c6b868f4554">
+5) Optimizers with Adaptive Learning Rates
+   - <img width="539" alt="image" src="https://github.com/user-attachments/assets/ab7fdc82-292d-4f52-a56b-dfe3818342de">
+   - <img width="549" alt="image" src="https://github.com/user-attachments/assets/54b6b487-6052-4168-b3ef-4389f8c00798">
+   - <img width="503" alt="image" src="https://github.com/user-attachments/assets/18150eb2-0bad-4e7a-ada4-241b1144411d">
+   - <img width="467" alt="image" src="https://github.com/user-attachments/assets/e1e60d5b-5996-45f8-b5a5-e2fa12c1c4ff">
+   - <img width="538" alt="image" src="https://github.com/user-attachments/assets/660226de-f22f-4171-bfd1-08628fccd461">
+   - <img width="491" alt="image" src="https://github.com/user-attachments/assets/a2375691-1413-43dc-bf04-03e22f58fb04">
+
+6) Second-Order Methods
+   - <img width="527" alt="image" src="https://github.com/user-attachments/assets/9abfa8f1-c8c6-4831-b032-ea9dd7e80d44">
+   - <img width="558" alt="image" src="https://github.com/user-attachments/assets/e2b6e0f2-627b-4b2c-859c-c578c4e313a8">
+   - <img width="539" alt="image" src="https://github.com/user-attachments/assets/63989f2e-a1cb-4664-a191-8c2fa2364cdc">
+   - <img width="543" alt="image" src="https://github.com/user-attachments/assets/c82beb4a-00d6-4a21-a282-50d898fdbb45">
+   - <img width="535" alt="image" src="https://github.com/user-attachments/assets/b9f13b16-aec4-4519-830f-0c6ec0223501">
+   - 
+
+
+
+
+
+
+
+
+
 
 
 
